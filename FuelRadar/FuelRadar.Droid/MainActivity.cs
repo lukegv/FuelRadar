@@ -17,6 +17,7 @@ namespace FuelRadar.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
+
             this.LoadApplication(new RootApplication());
         }
     }

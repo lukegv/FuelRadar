@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FuelRadar.UI.SearchStartPage">
+  <Grid Padding="10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="3*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="3*" />
+    </Grid.RowDefinitions>
+    <Button Grid.Row="0" Text="Search near my current position" />
+    <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="2"  />
+    <Entry Grid.Row="2" Placeholder="Street Name" HorizontalOptions="Fill" VerticalOptions="Center" />
+    <Entry Grid.Row="3" Placeholder="Town" HorizontalOptions="Fill" VerticalOptions="Center" />
+    <Button Grid.Row="4" Text="Search near the entered address" />
+  </Grid>
+</ContentPage>
