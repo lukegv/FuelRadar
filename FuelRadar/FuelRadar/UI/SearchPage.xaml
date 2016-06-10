@@ -6,6 +6,5 @@
     <Button Text="Test1" VerticalOptions="Center" HorizontalOptions="Center" />
   </ContentPage>
   <ContentPage>
-    <Button Text="Test2" VerticalOptions="Center" HorizontalOptions="Center" />
   </ContentPage>
 </CarouselPage>
