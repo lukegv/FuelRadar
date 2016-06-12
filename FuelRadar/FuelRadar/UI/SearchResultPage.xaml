@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FuelRadar.UI.SearchResultPage">
   <ContentPage Title="Top">
-    
+    <Grid>
+      
+    </Grid>
   </ContentPage>
   <ContentPage Title="List">
-    
+    <ListView>
+      
+    </ListView>
   </ContentPage>
   <ContentPage Title="Map">
     

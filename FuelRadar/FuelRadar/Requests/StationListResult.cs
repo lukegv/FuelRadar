@@ -1,10 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
-namespace FuelRadar.Model
+namespace FuelRadar.Requests
 {
-    public class GasStationResult
+    public class StationListResult
+    {
+        [JsonProperty("status")]
+        public String Status { get; set; }
+
+        [JsonProperty("ok")]
+        public bool IsOk { get; set; }
+
+        [JsonProperty("stations")]
+        public List<StationResult> Stations { get; set; }
+    }
+
+    public class StationResult
     {
         [JsonProperty("id")]
         public String ID { get; set; }

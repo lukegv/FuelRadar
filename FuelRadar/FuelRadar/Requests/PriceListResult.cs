@@ -1,9 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
 namespace FuelRadar.Requests
 {
+    public class PriceListResult
+    {
+
+
+        [JsonProperty("")]
+        public Dictionary<String, PriceResult> Prices { get; set; }
+
+        public PriceListResult()
+        {
+
+        }
+
+    }
+
     public class PriceResult
     {
         [JsonProperty("status")]
@@ -15,5 +30,10 @@ namespace FuelRadar.Requests
         public double E5Price { get; set; }
         [JsonProperty("e10")]
         public double E10Price { get; set; }
+
+        public PriceResult()
+        {
+
+        }
     }
 }

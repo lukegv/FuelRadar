@@ -10,8 +10,10 @@ namespace FuelRadar.UI
 {
     public partial class SearchStartPage : ContentPage
     {
-        public SearchStartPage()
+
+        public SearchStartPage(object dataContext)
         {
+            this.BindingContext = dataContext;
             this.InitializeComponent();
         }
     }

@@ -12,8 +12,10 @@
     </Grid.RowDefinitions>
     <Button Grid.Row="0" Text="Search near my current position" />
     <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="2"  />
-    <Entry Grid.Row="2" Placeholder="Street Name" HorizontalOptions="Fill" VerticalOptions="Center" />
+    <Entry Grid.Row="2" Placeholder="Street" HorizontalOptions="Fill" VerticalOptions="Center" />
     <Entry Grid.Row="3" Placeholder="Town" HorizontalOptions="Fill" VerticalOptions="Center" />
     <Button Grid.Row="4" Text="Search near the entered address" />
+    <!--Loading animation-->
+    <ActivityIndicator Grid.Row="0" Grid.RowSpan="5" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center"/>
   </Grid>
 </ContentPage>

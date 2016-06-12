@@ -10,8 +10,9 @@ namespace FuelRadar.UI
 {
     public partial class SearchResultPage : TabbedPage
     {
-        public SearchResultPage()
+        public SearchResultPage(object dataContext)
         {
+            this.BindingContext = dataContext;
             this.InitializeComponent();
         }
     }
