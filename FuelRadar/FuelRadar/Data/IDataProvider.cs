@@ -4,22 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using FuelRadar.Model;
+
 namespace FuelRadar.Data
 {
     public interface IDataProvider
     {
         // Gas stations
 
-        List<GasStationData> GetFavouriteStations();
+        List<Station> GetFavouriteStations();
 
-        void AddFavouriteStation(GasStationData gasStation);
+        void AddFavouriteStation(Station gasStation);
 
-        void RemoveFavouriteStation(GasStationData gasStation);
+        void RemoveFavouriteStation(Station gasStation);
 
         // Prices
 
-        List<PriceData> GetAllHistoricalPriceData();
+        List<Price> GetAllHistoricalPrices();
 
-        void AddPriceDataToHistory(PriceData price);
+        void AddPriceToHistory(Price price);
     }
 }

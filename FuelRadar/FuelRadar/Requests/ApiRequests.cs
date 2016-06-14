@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
+using FuelRadar.Model;
+
 namespace FuelRadar.Requests
 {
     public static class ApiRequests
@@ -14,19 +16,21 @@ namespace FuelRadar.Requests
         private const String LIST_REQUEST = "https://creativecommons.tankerkoenig.de/json/list.php?";
         private const String PRICE_REQUEST = "https://creativecommons.tankerkoenig.de/json/prices.php?";
 
-        public static async Task<StationListResult> RequestGasStations(double latitude, double longitude, double radius)
+        public static async Task<List<PriceInfo>> RequestGasStations(GlobalCoordinate location, double radius)
         {
             String requestString = BuildRequest(LIST_REQUEST, 
-                new Parameter("type", "all"), new Parameter("lat", latitude.ToString()),
-                new Parameter("lng", longitude.ToString()), new Parameter("rad", radius.ToString()),
+                new Parameter("type", "all"), new Parameter("lat", location.Latitude.ToString()),
+                new Parameter("lng", location.Longitude.ToString()), new Parameter("rad", radius.ToString()),
                 new Parameter("apikey", Secrets.API_KEY));
             HttpWebRequest httpRequest = WebRequest.CreateHttp(requestString);
             WebResponse response = await httpRequest.GetResponseAsync();
+            StationListResult result = null;
             using (StreamReader reader = new StreamReader(response.GetResponseStream()))
             using (JsonTextReader jsonReader = new JsonTextReader(reader))
             {
-                return JsonSerializer.Create().Deserialize<StationListResult>(jsonReader);
+                 result = JsonSerializer.CreateDefault().Deserialize<StationListResult>(jsonReader);
             }
+            return result.IsOk ? result.ToPriceInfos() : new List<PriceInfo>();
         }
 
         public static async Task<PriceListResult> RequestPrices(IEnumerable<String> stationIds)

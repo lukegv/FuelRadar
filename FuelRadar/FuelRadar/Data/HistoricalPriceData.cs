@@ -8,8 +8,8 @@ using SQLite;
 
 namespace FuelRadar.Data
 {
-    [Table("PriceHistory")]
-    public class PriceData
+    [Table("price_history")]
+    public class HistoricalPriceData
     {
         [Column("id"), PrimaryKey, AutoIncrement]
         public int ID { get; set; }
@@ -31,7 +31,7 @@ namespace FuelRadar.Data
         [Column("e10")]
         public double E10Price { get; set; }
 
-        public PriceData()
+        public HistoricalPriceData()
         {
 
         }

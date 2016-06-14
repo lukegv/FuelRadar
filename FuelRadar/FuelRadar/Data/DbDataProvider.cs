@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using FuelRadar.Model;
 using SQLite;
 
 namespace FuelRadar.Data
@@ -25,29 +25,31 @@ namespace FuelRadar.Data
             this.DbLock = new Object();
         }
 
-        public List<GasStationData> GetFavouriteStations()
+        public List<Station> GetFavouriteStations()
         {
             throw new NotImplementedException();
         }
 
-        public void AddFavouriteStation(GasStationData gasStation)
+        public void AddFavouriteStation(Station gasStation)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveFavouriteStation(GasStationData gasStation)
+        public void RemoveFavouriteStation(Station gasStation)
         {
             throw new NotImplementedException();
         }
 
-        public List<PriceData> GetAllHistoricalPriceData()
+        public List<Price> GetAllHistoricalPrices()
         {
             throw new NotImplementedException();
         }
 
-        public void AddPriceDataToHistory(PriceData price)
+        public void AddPriceToHistory(Price price)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

@@ -7,8 +7,6 @@ namespace FuelRadar.Requests
 {
     public class PriceListResult
     {
-
-
         [JsonProperty("")]
         public Dictionary<String, PriceResult> Prices { get; set; }
 

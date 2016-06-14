@@ -8,7 +8,7 @@
     </Grid>
   </ContentPage>
   <ContentPage Title="List">
-    <ListView>
+    <ListView ItemsSource="{Binding Results}">
       
     </ListView>
   </ContentPage>

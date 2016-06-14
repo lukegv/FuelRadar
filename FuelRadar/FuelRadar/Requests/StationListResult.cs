@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Newtonsoft.Json;
+
+using FuelRadar.Model;
 
 namespace FuelRadar.Requests
 {
@@ -15,6 +18,11 @@ namespace FuelRadar.Requests
 
         [JsonProperty("stations")]
         public List<StationResult> Stations { get; set; }
+
+        public List<PriceInfo> ToPriceInfos()
+        {
+            return this.Stations.Select(item => item.ToPriceInfo()).ToList();
+        }
     }
 
     public class StationResult
@@ -38,5 +46,12 @@ namespace FuelRadar.Requests
         public double E5Price { get; set; }
         [JsonProperty("e10")]
         public double E10Price { get; set; }
+
+        public PriceInfo ToPriceInfo()
+        {
+            Station station = new Station(this.ID, this.Name, this.Brand, this.Latitude, this.Longitude);
+            Price price = new Price(this.DieselPrice, this.E5Price, this.E10Price);
+            return new PriceInfo(station, price);
+        }
     }
 }

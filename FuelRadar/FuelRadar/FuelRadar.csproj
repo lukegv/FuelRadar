@@ -36,13 +36,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\IDataProvider.cs" />
-    <Compile Include="Data\GasStationData.cs" />
-    <Compile Include="Data\PriceData.cs" />
+    <Compile Include="Data\FavouriteStationData.cs" />
+    <Compile Include="Data\HistoricalPriceData.cs" />
     <Compile Include="Data\DbDataProvider.cs" />
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Brand.cs" />
+    <Compile Include="Model\GlobalCoordinate.cs" />
+    <Compile Include="Model\Price.cs" />
+    <Compile Include="Model\PriceInfo.cs" />
+    <Compile Include="Model\Station.cs" />
     <Compile Include="Requests\ApiRequests.cs" />
     <Compile Include="Requests\StationListResult.cs" />
     <Compile Include="Requests\PriceListResult.cs" />
     <Compile Include="Secrets.cs" />
+    <Compile Include="UI\Converter\BooleanInverseConverter.cs" />
     <Compile Include="UI\SearchPage.cs" />
     <Compile Include="UI\SearchResultPage.xaml.cs">
       <DependentUpon>SearchResultPage.xaml</DependentUpon>
@@ -61,9 +68,22 @@
     </Compile>
     <Compile Include="UI\RootApplication.cs" />
     <Compile Include="UI\RootPage.cs" />
-    <Compile Include="ViewModel\SearchVM.cs" />
+    <Compile Include="ViewModel\SearchResultVM.cs" />
+    <Compile Include="ViewModel\SearchStartVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -79,6 +99,9 @@
     <Reference Include="SQLitePCL.raw, Version=0.8.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SQLitePCL.raw.0.8.6\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCL.raw.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Windows">
+      <HintPath>C:\Program Files (x86)\Windows Phone Kits\8.1\References\CommonConfiguration\Neutral\Windows.winmd</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.0.0.6482\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
@@ -117,9 +140,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="UI\SearchStartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

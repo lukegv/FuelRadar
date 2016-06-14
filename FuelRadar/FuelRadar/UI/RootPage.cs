@@ -11,6 +11,9 @@ namespace FuelRadar.UI
 
         public RootPage()
         {
+            // Define master behavior as slider
+            this.MasterBehavior = MasterBehavior.Popover;
+
             this.DetailPageItems = new List<DetailPageItem>();
             this.DetailPageItems.Add(new DetailPageItem("Home", "FuelRadar.UI.Images.home.png", new HomePage()));
             this.DetailPageItems.Add(new DetailPageItem("Search", "FuelRadar.UI.Images.search.png", new SearchPage()));

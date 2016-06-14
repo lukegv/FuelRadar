@@ -1,21 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:FuelRadar.UI.Converter"
              x:Class="FuelRadar.UI.SearchStartPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converter:BooleanInverseConverter x:Key="BooleanInverse" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
   <Grid Padding="10">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="3*" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="3*" />
-    </Grid.RowDefinitions>
-    <Button Grid.Row="0" Text="Search near my current position" />
-    <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="2"  />
-    <Entry Grid.Row="2" Placeholder="Street" HorizontalOptions="Fill" VerticalOptions="Center" />
-    <Entry Grid.Row="3" Placeholder="Town" HorizontalOptions="Fill" VerticalOptions="Center" />
-    <Button Grid.Row="4" Text="Search near the entered address" />
+    <Grid IsVisible="{Binding IsSearching, Converter={StaticResource BooleanInverse}}">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="3*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="3*" />
+      </Grid.RowDefinitions>
+      <Button Grid.Row="0" Text="Search near my current position" Command="{Binding StartGps}" />
+      <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="2"  />
+      <Entry Grid.Row="2" Placeholder="Street" HorizontalOptions="Fill" VerticalOptions="Center" Text="{Binding AddressStreet}" />
+      <Entry Grid.Row="3" Placeholder="Town" HorizontalOptions="Fill" VerticalOptions="Center" Text="{Binding AddressTown}" />
+      <Button Grid.Row="4" Text="Search near the entered address" Command="{Binding StartAddress}" />
+    </Grid>
     <!--Loading animation-->
-    <ActivityIndicator Grid.Row="0" Grid.RowSpan="5" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center"/>
+    <ActivityIndicator IsVisible="{Binding IsSearching}" IsRunning="{Binding IsSearching}" VerticalOptions="Center" HorizontalOptions="Center"/>
   </Grid>
 </ContentPage>
