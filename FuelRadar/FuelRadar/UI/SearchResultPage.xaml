@@ -10,12 +10,17 @@
   </ContentPage>
   <ContentPage Title="List">
     <ListView ItemsSource="{Binding Results}">
-      
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextCell Text="{Binding GasStation.Name}" Detail="{Binding GasStation.Id}" />
+        </DataTemplate>
+      </ListView.ItemTemplate>
     </ListView>
   </ContentPage>
   <ContentPage Title="Map">
     <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill" Padding="0">
-      <maps:Map IsShowingUser="True" />
+      <maps:Map x:Name="ResultMap" IsShowingUser="True" >
+      </maps:Map>
     </StackLayout>
   </ContentPage>
 </TabbedPage>

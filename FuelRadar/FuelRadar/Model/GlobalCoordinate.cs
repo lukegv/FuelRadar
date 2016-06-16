@@ -16,5 +16,17 @@ namespace FuelRadar.Model
             this.Latitude = latitude;
             this.Longitude = longitude;
         }
+
+        public GlobalCoordinate(Xamarin.Forms.Maps.Position position)
+        {
+            this.Latitude = position.Latitude;
+            this.Longitude = position.Longitude;
+        }
+
+        public Xamarin.Forms.Maps.Position ToPosition()
+        {
+            return new Xamarin.Forms.Maps.Position(this.Latitude, this.Longitude);
+        }
+
     }
 }

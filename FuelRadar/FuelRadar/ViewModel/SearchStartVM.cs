@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-using PropertyChanged;
 using GalaSoft.MvvmLight.Command;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
+using PropertyChanged;
+using Xamarin.Forms.Maps;
 
 using FuelRadar.Model;
 using FuelRadar.Requests;
+
 
 namespace FuelRadar.ViewModel
 {
@@ -44,7 +48,9 @@ namespace FuelRadar.ViewModel
         private async void RunGps()
         {
             this.SetSearchState(true);
-            List<PriceInfo> results = await ApiRequests.RequestGasStations(new GlobalCoordinate(50.775346, 6.083887), 25);
+            IGeolocator geolocator = CrossGeolocator.Current;
+            Plugin.Geolocator.Abstractions.Position position = await geolocator.GetPositionAsync(10000);
+            List<PriceInfo> results = await ApiRequests.RequestGasStations(new GlobalCoordinate(position.Latitude, position.Longitude), 3);
             if (results.Count > 0)
             {
                 this.ResultsFound?.Invoke(this, results);
@@ -53,7 +59,13 @@ namespace FuelRadar.ViewModel
 
         private async void RunAddress()
         {
-            
+            this.SetSearchState(true);
+            IEnumerable<Xamarin.Forms.Maps.Position> positions = await (new Geocoder()).GetPositionsForAddressAsync(this.AddressStreet + "\n" + this.AddressTown);
+            List<PriceInfo> results = await ApiRequests.RequestGasStations(new GlobalCoordinate(positions.First()), 3);
+            if (results.Count > 0)
+            {
+                this.ResultsFound?.Invoke(this, results);
+            }
         }
 
     }

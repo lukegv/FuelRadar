@@ -17,6 +17,7 @@ namespace FuelRadar.UI
             this.DetailPageItems = new List<DetailPageItem>();
             this.DetailPageItems.Add(new DetailPageItem("Home", "FuelRadar.UI.Images.home.png", new HomePage()));
             this.DetailPageItems.Add(new DetailPageItem("Search", "FuelRadar.UI.Images.search.png", new SearchPage()));
+            this.DetailPageItems.Add(new DetailPageItem("Favorites", "FuelRadar.UI.Images.favorites.png", new FavoritesPage()));
 
             this.Master = new MasterPage(this.DetailPageItems);
             (this.Master as MasterPage).DetailPageChanged += OnDetailPageChanged;

@@ -11,16 +11,16 @@
   <Grid Padding="10">
     <Grid IsVisible="{Binding IsSearching, Converter={StaticResource BooleanInverse}}">
       <Grid.RowDefinitions>
-        <RowDefinition Height="3*" />
         <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
         <RowDefinition Height="*" />
-        <RowDefinition Height="*" />
-        <RowDefinition Height="3*" />
       </Grid.RowDefinitions>
       <Button Grid.Row="0" Text="Search near my current position" Command="{Binding StartGps}" />
-      <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="2"  />
-      <Entry Grid.Row="2" Placeholder="Street" HorizontalOptions="Fill" VerticalOptions="Center" Text="{Binding AddressStreet}" />
-      <Entry Grid.Row="3" Placeholder="Town" HorizontalOptions="Fill" VerticalOptions="Center" Text="{Binding AddressTown}" />
+      <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" HeightRequest="2"  />
+      <Entry Grid.Row="2" Placeholder="Street" FontSize="20" HorizontalOptions="Fill" Text="{Binding AddressStreet}" />
+      <Entry Grid.Row="3" Placeholder="Town" FontSize="20" HorizontalOptions="Fill" Text="{Binding AddressTown}" />
       <Button Grid.Row="4" Text="Search near the entered address" Command="{Binding StartAddress}" />
     </Grid>
     <!--Loading animation-->

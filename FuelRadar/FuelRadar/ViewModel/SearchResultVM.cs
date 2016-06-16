@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,13 @@ using PropertyChanged;
 
 using FuelRadar.Model;
 
-
 namespace FuelRadar.ViewModel
 {
     [ImplementPropertyChanged]
-    public class SearchResultVM
+    public class SearchResultVM : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public PriceInfo TopResult
         {
             get

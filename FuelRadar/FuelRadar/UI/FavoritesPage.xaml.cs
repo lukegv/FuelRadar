@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace FuelRadar.UI
 {
-    public partial class HomePage : ContentPage
+    public partial class FavoritesPage : CarouselPage
     {
-        public HomePage()
+        public FavoritesPage()
         {
             
             this.InitializeComponent();

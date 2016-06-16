@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FuelRadar.Model;
+
 using SQLite;
+
+using FuelRadar.Model;
 
 namespace FuelRadar.Data
 {
@@ -18,7 +20,7 @@ namespace FuelRadar.Data
         }
 
         private Object DbLock;
-        private SQLiteConnection DbConnection;
+        private SQLiteConnection Connection;
 
         private DbDataProvider()
         {
@@ -35,7 +37,12 @@ namespace FuelRadar.Data
             throw new NotImplementedException();
         }
 
-        public void RemoveFavouriteStation(Station gasStation)
+        public void RemoveFavouriteStation(string gasStationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsFavorite(string gasStationId)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +56,5 @@ namespace FuelRadar.Data
         {
             throw new NotImplementedException();
         }
-
-        
     }
 }

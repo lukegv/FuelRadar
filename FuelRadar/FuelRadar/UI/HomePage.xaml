@@ -1,6 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:FuelRadar.UI.Converter;assembly=FuelRadar"
              x:Class="FuelRadar.UI.HomePage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <ContentView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#C94136">
+      <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15" >
+        <Image Source="{converter:ImageResourceExtension FuelRadar.UI.Images.fuelRadar.png}" />
+        <Label FontSize="30" Text="Fuel Radar" TextColor="White" />
+      </StackLayout>
+    </ContentView>
+    <ContentView Grid.Row="1" Grid.Column="0" Padding="10">
+      <Button Text="Search new gas stations" />
+    </ContentView>
+    <ContentView Grid.Row="1" Grid.Column="1" Padding="10">
+      <Button Text="Browse my favorite gas stations" />
+    </ContentView>
+  </Grid>
 </ContentPage>

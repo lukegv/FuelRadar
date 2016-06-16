@@ -16,7 +16,9 @@ namespace FuelRadar.Data
 
         void AddFavouriteStation(Station gasStation);
 
-        void RemoveFavouriteStation(Station gasStation);
+        void RemoveFavouriteStation(String gasStationId);
+
+        bool IsFavorite(String gasStationId);
 
         // Prices
 
