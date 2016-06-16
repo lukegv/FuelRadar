@@ -1,6 +1,9 @@
 ﻿using Foundation;
 using UIKit;
 
+using Xamarin;
+using Xamarin.Forms;
+
 using FuelRadar.UI;
 
 namespace FuelRadar.iOS
@@ -20,7 +23,9 @@ namespace FuelRadar.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Forms.Init();
+            FormsMaps.Init();
+
             LoadApplication(new RootApplication());
 
             return base.FinishedLaunching(app, options);

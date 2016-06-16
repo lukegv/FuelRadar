@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 using FuelRadar.UI;
+using Xamarin;
 
 namespace FuelRadar.Droid
 {
@@ -17,6 +18,7 @@ namespace FuelRadar.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
+            FormsMaps.Init(this, bundle);
 
             this.LoadApplication(new RootApplication());
         }

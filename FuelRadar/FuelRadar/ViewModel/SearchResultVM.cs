@@ -14,6 +14,14 @@ namespace FuelRadar.ViewModel
     [ImplementPropertyChanged]
     public class SearchResultVM
     {
+        public PriceInfo TopResult
+        {
+            get
+            {
+                return this.Results.OrderByDescending(price => price.CurrentPrice.Diesel).First();
+            }
+        }
+
         public List<PriceInfo> Results { get; private set; }
 
         public SearchResultVM()

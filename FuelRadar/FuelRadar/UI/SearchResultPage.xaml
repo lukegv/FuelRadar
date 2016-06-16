@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FuelRadar.UI.SearchResultPage">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+            x:Class="FuelRadar.UI.SearchResultPage">
   <ContentPage Title="Top">
     <Grid>
       
@@ -13,6 +14,8 @@
     </ListView>
   </ContentPage>
   <ContentPage Title="Map">
-    
+    <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill" Padding="0">
+      <maps:Map IsShowingUser="True" />
+    </StackLayout>
   </ContentPage>
 </TabbedPage>
