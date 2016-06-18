@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FuelRadar.ViewModel
-{
-    public class PriceInfoVM
-    {
+using SQLite;
 
+namespace FuelRadar.Data
+{
+    public interface ISqliteProvider
+    {
+        SQLiteConnection GetConnection();
     }
 }

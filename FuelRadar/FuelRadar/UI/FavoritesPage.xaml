@@ -6,7 +6,9 @@
   <CarouselPage.ItemTemplate>
     <DataTemplate>
       <ContentPage>
-        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding GasStation.Name}" />
+        <Grid>
+          <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding GasStation.Name}" />
+        </Grid>
       </ContentPage>
     </DataTemplate>
   </CarouselPage.ItemTemplate>

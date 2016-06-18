@@ -26,5 +26,14 @@ namespace FuelRadar.Model
             this.Location = new GlobalCoordinate(latitude, longitude);
             this.IsFavorite = false; // TODO: get from db
         }
+
+        public Station(String id, String name, int brand, double latitude, double longitude)
+        {
+            this.ID = id;
+            this.Name = name;
+            this.Brand = (Brand)brand;
+            this.Location = new GlobalCoordinate(latitude, longitude);
+            this.IsFavorite = true;
+        }
     }
 }

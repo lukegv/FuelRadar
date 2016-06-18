@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using SQLite;
+using Xamarin.Forms;
 
 using FuelRadar.Model;
 
@@ -13,33 +14,63 @@ namespace FuelRadar.Data
     public class DbDataProvider : IDataProvider
     {
         private static DbDataProvider singleton = null;
-        public static DbDataProvider Instance()
+        public static DbDataProvider Instance
         {
-            if (DbDataProvider.singleton == null) DbDataProvider.singleton = new DbDataProvider();
-            return DbDataProvider.singleton;
+            get
+            {
+                if (DbDataProvider.singleton == null) DbDataProvider.singleton = new DbDataProvider();
+                return DbDataProvider.singleton;
+            }
         }
 
         private Object DbLock;
-        private SQLiteConnection Connection;
+        private SQLiteConnection DbConnection;
 
         private DbDataProvider()
         {
             this.DbLock = new Object();
+            this.DbConnection = DependencyService.Get<ISqliteProvider>().GetConnection();
+            this.DbConnection.CreateTable<FavouriteStationData>();
+            this.DbConnection.CreateTable<HistoricalPriceData>();
         }
 
         public List<Station> GetFavouriteStations()
         {
-            throw new NotImplementedException();
+            List<FavouriteStationData> queryResult;
+            lock (this.DbLock)
+            {
+                queryResult = this.DbConnection.Table<FavouriteStationData>().ToList();
+            }
+            return queryResult.Select(favData => favData.ToStation()).ToList();
+        }
+
+        public int GetFavouriteStationCount()
+        {
+            lock (this.DbLock)
+            {
+                return this.DbConnection.Table<FavouriteStationData>().Count();
+            }
         }
 
         public void AddFavouriteStation(Station gasStation)
         {
-            throw new NotImplementedException();
+            lock (this.DbLock)
+            {
+                int count = this.DbConnection.Table<FavouriteStationData>().Count();
+                if (count == 10)
+                {
+                    // TODO: Delete a favorite
+                }
+                this.DbConnection.Insert(new FavouriteStationData(gasStation));
+            }
         }
 
         public void RemoveFavouriteStation(string gasStationId)
         {
-            throw new NotImplementedException();
+            lock (this.DbLock)
+            {
+                
+            }
         }
 
         public bool IsFavorite(string gasStationId)
@@ -56,5 +87,6 @@ namespace FuelRadar.Data
         {
             throw new NotImplementedException();
         }
+
     }
 }

@@ -39,6 +39,7 @@
     <Compile Include="Data\FavouriteStationData.cs" />
     <Compile Include="Data\HistoricalPriceData.cs" />
     <Compile Include="Data\DbDataProvider.cs" />
+    <Compile Include="Data\ISqliteProvider.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\GlobalCoordinate.cs" />
@@ -73,7 +74,6 @@
     </Compile>
     <Compile Include="UI\RootApplication.cs" />
     <Compile Include="UI\RootPage.cs" />
-    <Compile Include="ViewModel\PriceInfoVM.cs" />
     <Compile Include="ViewModel\SearchResultVM.cs" />
     <Compile Include="ViewModel\SearchStartVM.cs" />
   </ItemGroup>
