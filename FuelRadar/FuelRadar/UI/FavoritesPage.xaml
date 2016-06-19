@@ -7,7 +7,12 @@
     <DataTemplate>
       <ContentPage>
         <Grid>
-          <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding GasStation.Name}" />
+          <Grid.RowDefinitions>
+            <RowDefinition />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
         </Grid>
       </ContentPage>
     </DataTemplate>

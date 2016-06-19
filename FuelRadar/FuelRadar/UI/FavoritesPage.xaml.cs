@@ -14,6 +14,16 @@ namespace FuelRadar.UI
 {
     public partial class FavoritesPage : CarouselPage
     {
+        private ContentPage emptyPage;
+        private ContentPage EmptyPage
+        {
+            get
+            {
+                if (this.emptyPage == null) this.emptyPage = this.CreateEmptyPage();
+                return this.emptyPage;
+            }
+        }
+
         public FavoritesPage()
         {
             if (DbDataProvider.Instance.GetFavouriteStationCount() > 0)
@@ -22,12 +32,33 @@ namespace FuelRadar.UI
             }
             else
             {
-                this.Children.Add(
-                    new ContentPage() {
-                       Content = new Grid()
-                       {
-                           Padding = 15,
-                           Children =
+                this.Children.Add(this.EmptyPage);
+            }
+            this.InitializeComponent();
+        }
+
+        public void Update()
+        {
+            if (DbDataProvider.Instance.GetFavouriteStationCount() > 0)
+            {
+                this.Children.Remove(this.EmptyPage);
+                this.BindingContext = new FavoritesVM();
+            }
+            else
+            {
+                this.BindingContext = null;
+                this.Children.Add(this.EmptyPage);
+            }
+        }
+
+        private ContentPage CreateEmptyPage()
+        {
+            return new ContentPage()
+            {
+                Content = new Grid()
+                {
+                    Padding = 15,
+                    Children =
                            {
                                new Label()
                                {
@@ -38,11 +69,8 @@ namespace FuelRadar.UI
                                    HorizontalTextAlignment = TextAlignment.Center
                                }
                            }
-                       }
-                    }
-                );
-            }
-            this.InitializeComponent();
+                }
+            };
         }
     }
 }

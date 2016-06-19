@@ -35,6 +35,15 @@ namespace FuelRadar.Requests
 
         public static async Task<PriceListResult> RequestPrices(IEnumerable<String> stationIds)
         {
+            String requestString = ApiRequests.BuildRequest(PRICE_REQUEST);
+            HttpWebRequest httpRequest = WebRequest.CreateHttp(requestString);
+            WebResponse response = await httpRequest.GetResponseAsync();
+            PriceListResult result = null;
+            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+            using (JsonTextReader jsonReader = new JsonTextReader(reader))
+            {
+                result = JsonSerializer.CreateDefault().Deserialize<PriceListResult>(jsonReader);
+            }
             return null;
         }
 

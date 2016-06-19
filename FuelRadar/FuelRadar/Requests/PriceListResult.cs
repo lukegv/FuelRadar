@@ -7,6 +7,12 @@ namespace FuelRadar.Requests
 {
     public class PriceListResult
     {
+        [JsonProperty("status")]
+        public String Status { get; set; }
+
+        [JsonProperty("ok")]
+        public bool IsOk { get; set; }
+
         [JsonProperty("")]
         public Dictionary<String, PriceResult> Prices { get; set; }
 

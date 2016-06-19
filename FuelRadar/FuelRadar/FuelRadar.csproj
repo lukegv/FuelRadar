@@ -50,6 +50,9 @@
     <Compile Include="Requests\StationListResult.cs" />
     <Compile Include="Requests\PriceListResult.cs" />
     <Compile Include="Secrets.cs" />
+    <Compile Include="UI\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Converter\BooleanInverseConverter.cs" />
     <Compile Include="UI\Converter\ImageResourceExtension.cs" />
     <Compile Include="UI\FavoritesPage.xaml.cs">
@@ -61,6 +64,12 @@
     </Compile>
     <Compile Include="UI\SearchStartPage.xaml.cs">
       <DependentUpon>SearchStartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\FavoritesVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
@@ -175,6 +184,24 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <EmbeddedResource Include="UI\Images\fuelRadar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\AboutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\StatisticsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
