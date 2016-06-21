@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
+using FuelRadar.Model;
+
 namespace FuelRadar.Requests
 {
     public class PriceListResult
@@ -13,7 +15,7 @@ namespace FuelRadar.Requests
         [JsonProperty("ok")]
         public bool IsOk { get; set; }
 
-        [JsonProperty("")]
+        [JsonProperty("prices")]
         public Dictionary<String, PriceResult> Prices { get; set; }
 
         public PriceListResult()
@@ -38,6 +40,15 @@ namespace FuelRadar.Requests
         public PriceResult()
         {
 
+        }
+
+        public Price ToPrice()
+        {
+            if (this.Status == "open")
+            {
+                return new Price(this.DieselPrice, this.E5Price, this.E10Price);
+            }
+            return null;
         }
     }
 }

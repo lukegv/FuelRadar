@@ -19,10 +19,10 @@
       </StackLayout>
     </ContentView>
     <ContentView Grid.Row="1" Grid.Column="0" Padding="10">
-      <Button Text="Search new gas stations" />
+      <Button Text="Search new gas stations" BackgroundColor="White" />
     </ContentView>
     <ContentView Grid.Row="1" Grid.Column="1" Padding="10">
-      <Button Text="Browse my favorite gas stations" />
+      <Button Text="Browse my favorite gas stations" BackgroundColor="White" />
     </ContentView>
   </Grid>
 </ContentPage>

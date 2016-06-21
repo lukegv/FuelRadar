@@ -17,5 +17,10 @@ namespace FuelRadar.Model
             this.GasStation = station;
             this.CurrentPrice = price;
         }
+
+        public void UpdatePrice(Price price)
+        {
+            this.CurrentPrice = price;
+        }
     }
 }

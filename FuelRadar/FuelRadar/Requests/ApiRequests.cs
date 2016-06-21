@@ -30,12 +30,13 @@ namespace FuelRadar.Requests
             {
                  result = JsonSerializer.CreateDefault().Deserialize<StationListResult>(jsonReader);
             }
-            return result.IsOk ? result.ToPriceInfos() : new List<PriceInfo>();
+            return result.IsOk ? result.ToPriceInfos() : null;
         }
 
-        public static async Task<PriceListResult> RequestPrices(IEnumerable<String> stationIds)
+        public static async Task<Dictionary<String, Price>> RequestPrices(IEnumerable<String> stationIds)
         {
-            String requestString = ApiRequests.BuildRequest(PRICE_REQUEST);
+            String requestString = ApiRequests.BuildRequest(PRICE_REQUEST, 
+                new Parameter("ids", ApiRequests.BuildIdsParameter(stationIds)));
             HttpWebRequest httpRequest = WebRequest.CreateHttp(requestString);
             WebResponse response = await httpRequest.GetResponseAsync();
             PriceListResult result = null;
@@ -44,12 +45,19 @@ namespace FuelRadar.Requests
             {
                 result = JsonSerializer.CreateDefault().Deserialize<PriceListResult>(jsonReader);
             }
-            return null;
+            return result.IsOk ? result.Prices.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToPrice()) : null;
         }
 
         private static String BuildRequest(String endpoint, params Parameter[] parameters)
         {
             return endpoint + new List<Parameter>(parameters).Aggregate(String.Empty, (a, b) => a + "&" + b.ToString()).TrimStart('&');
+        }
+
+        private const String QUOTE = "\"";
+
+        private static String BuildIdsParameter(IEnumerable<String> ids)
+        {
+            return "[" + String.Join(",", ids.Select(id => QUOTE + id + QUOTE)) + "]";
         }
 
     }

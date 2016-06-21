@@ -6,13 +6,15 @@
   <CarouselPage.ItemTemplate>
     <DataTemplate>
       <ContentPage>
-        <Grid>
+        <Grid Padding="10">
           <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
           </Grid.RowDefinitions>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-          </Grid.ColumnDefinitions>
+          <StackLayout Grid.Row="0" Orientation="Horizontal">
+            <Label Text="{Binding GasStation.Name}" FontSize="24" />
+          </StackLayout>
         </Grid>
       </ContentPage>
     </DataTemplate>

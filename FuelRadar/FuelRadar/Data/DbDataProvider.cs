@@ -36,20 +36,22 @@ namespace FuelRadar.Data
 
         public List<Station> GetFavouriteStations()
         {
-            List<FavouriteStationData> queryResult;
-            lock (this.DbLock)
-            {
-                queryResult = this.DbConnection.Table<FavouriteStationData>().ToList();
-            }
-            return queryResult.Select(favData => favData.ToStation()).ToList();
+            //List<FavouriteStationData> queryResult;
+            //lock (this.DbLock)
+            //{
+            //    queryResult = this.DbConnection.Table<FavouriteStationData>().ToList();
+            //}
+            //return queryResult.Select(favData => favData.ToStation()).ToList();
+            return (new Station[] { new Station("", "Test 1", "", 0, 0), new Station("", "Station 2", "", 0, 0) }).ToList();
         }
 
         public int GetFavouriteStationCount()
         {
-            lock (this.DbLock)
-            {
-                return this.DbConnection.Table<FavouriteStationData>().Count();
-            }
+            //lock (this.DbLock)
+            //{
+            //    return this.DbConnection.Table<FavouriteStationData>().Count();
+            //}
+            return 2;
         }
 
         public void AddFavouriteStation(Station gasStation)
