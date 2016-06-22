@@ -18,13 +18,15 @@
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
       <ContentView Grid.Row="0" Padding="10">
-        <Button Text="Search near my current position" Command="{Binding StartGps}" BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
+        <Button Text="Search near my current position" Image="gps.png" Image.Aspect="AspectFit"
+                Command="{Binding StartGps}" BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
       </ContentView>
       <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" HeightRequest="2"  />
       <Entry Grid.Row="2" Placeholder="Street" FontSize="20" HorizontalOptions="Fill" Text="{Binding AddressStreet}" />
       <Entry Grid.Row="3" Placeholder="Town" FontSize="20" HorizontalOptions="Fill" Text="{Binding AddressTown}" />
       <ContentView Grid.Row="4" Padding="10">
-        <Button Text="Search near the entered address" Command="{Binding StartAddress}" BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
+        <Button Text="Search near the entered address" Image="address.png" Image.Aspect="AspectFit"
+                Command="{Binding StartAddress}" BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
       </ContentView>
     </Grid>
     <!--Loading animation-->

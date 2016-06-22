@@ -7,22 +7,23 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
       <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-    <ContentView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#C94136">
-      <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15" >
-        <Image Source="{converter:ImageResourceExtension FuelRadar.UI.Images.fuelRadar.png}" />
-        <Label FontSize="30" Text="Fuel Radar" TextColor="White" />
+    <ContentView Grid.Row="0" BackgroundColor="#C94136">
+      <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" >
+        <Frame Padding="0" OutlineColor="Black" HorizontalOptions="Center" VerticalOptions="Center">
+          <Image Source="{converter:ImageResourceExtension FuelRadar.UI.Images.fuelRadar.png}" />
+        </Frame>
+        <Label FontSize="24" Text="Fuel Radar" TextColor="White" />
       </StackLayout>
     </ContentView>
-    <ContentView Grid.Row="1" Grid.Column="0" Padding="10">
-      <Button Text="Search new gas stations" BackgroundColor="White" />
+    <ContentView Grid.Row="1" Padding="10">
+      <Button Text="Search new gas stations" Image="search.png" Image.Aspect="AspectFit"
+              BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
     </ContentView>
-    <ContentView Grid.Row="1" Grid.Column="1" Padding="10">
-      <Button Text="Browse my favorite gas stations" BackgroundColor="White" />
+    <ContentView Grid.Row="2" Padding="10">
+      <Button Text="Browse my favorite gas stations" Image="favorites.png" Image.Aspect="AspectFit"
+              BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
     </ContentView>
   </Grid>
 </ContentPage>

@@ -13,23 +13,43 @@ namespace FuelRadar.ViewModel
     [ImplementPropertyChanged]
     public class PriceInfoVM
     {
-        public Station GasStation
+        public String Name
         {
             get
             {
-                return this.RepresentedObject.GasStation;
+                return this.RepresentedObject.GasStation.Name;
             }
         }
 
-        public Price CurrentPrice
+        public GlobalCoordinate Location
         {
             get
             {
-                return this.RepresentedObject.CurrentPrice;
+                return this.RepresentedObject.GasStation.Location;
             }
-            set
+        }
+
+        public Brand Brand
+        {
+            get
             {
-                this.RepresentedObject.UpdatePrice(value);
+                return this.RepresentedObject.GasStation.Brand;
+            }
+        }
+
+        public double MainPrice
+        {
+            get
+            {
+                return this.RepresentedObject.CurrentPrice.Diesel;
+            }
+        }
+
+        public String MainPriceString
+        {
+            get
+            {
+                return this.MainPrice.ToString() + " €";
             }
         }
 
@@ -42,7 +62,8 @@ namespace FuelRadar.ViewModel
 
         public void UpdatePrice(Price price)
         {
-            this.CurrentPrice = price;
+            this.RepresentedObject.UpdatePrice(price);
+            // update prices
         }
 
     }

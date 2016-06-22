@@ -54,6 +54,8 @@
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Converter\BooleanInverseConverter.cs" />
+    <Compile Include="UI\Converter\BrandToColorConverter.cs" />
+    <Compile Include="UI\Converter\BrandToIconConverter.cs" />
     <Compile Include="UI\Converter\ImageResourceExtension.cs" />
     <Compile Include="UI\FavoritesPage.xaml.cs">
       <DependentUpon>FavoritesPage.xaml</DependentUpon>
@@ -148,11 +150,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UI\Images\favorites.png" />
-    <EmbeddedResource Include="UI\Images\home.png" />
-    <EmbeddedResource Include="UI\Images\search.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="UI\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -185,6 +182,17 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <EmbeddedResource Include="UI\Images\fuelRadar.png" />
+    <EmbeddedResource Include="UI\Images\about.png" />
+    <EmbeddedResource Include="UI\Images\address.png" />
+    <EmbeddedResource Include="UI\Images\favorites.png" />
+    <EmbeddedResource Include="UI\Images\gps.png" />
+    <EmbeddedResource Include="UI\Images\home.png" />
+    <EmbeddedResource Include="UI\Images\search.png" />
+    <EmbeddedResource Include="UI\Images\settings.png" />
+    <EmbeddedResource Include="UI\Images\statistics.png" />
+    <EmbeddedResource Include="UI\Images\BrandIcons\brandAral.png" />
+    <EmbeddedResource Include="UI\Images\BrandIcons\brandNone.png" />
+    <EmbeddedResource Include="UI\Images\BrandIcons\brandShell.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\SettingsPage.xaml">
@@ -204,6 +212,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

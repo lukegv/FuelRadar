@@ -27,24 +27,24 @@ namespace FuelRadar.UI
         {
             if (e.PropertyName == "Results")
             {
-                List<PriceInfo> results = (sender as SearchResultVM).Results;
+                List<PriceInfoVM> results = (sender as SearchResultVM).Results;
                 // set station pins
                 IEnumerable<Pin> pins = results.Select(
                     result => new Pin() {
-                        Position = result.GasStation.Location.ToPosition(),
+                        Position = result.Location.ToPosition(),
                         Type = PinType.SearchResult,
-                        Label = result.GasStation.Name });
+                        Label = result.Name });
                 foreach (Pin pin in pins)
                 {
                     this.ResultMap.Pins.Add(pin);
                 }
                 // get map position
-                double maxLat = results.Max(result => result.GasStation.Location.Latitude);
-                double minLat = results.Min(result => result.GasStation.Location.Latitude);
-                double maxLong = results.Max(result => result.GasStation.Location.Longitude);
-                double minLong = results.Min(result => result.GasStation.Location.Longitude);
+                double maxLat = results.Max(result => result.Location.Latitude);
+                double minLat = results.Min(result => result.Location.Latitude);
+                double maxLong = results.Max(result => result.Location.Longitude);
+                double minLong = results.Min(result => result.Location.Longitude);
                 Position center = new Position((minLat + maxLat) / 2, (minLong + maxLong) / 2);
-                MapSpan mapArea = new MapSpan(center, (maxLat - minLat) * 1.1, (maxLong - minLong) * 1.1);
+                MapSpan mapArea = new MapSpan(center, (maxLat - minLat) * 1.25, (maxLong - minLong) * 1.25);
                 this.ResultMap.MoveToRegion(mapArea);
             }
         }

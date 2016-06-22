@@ -8,17 +8,26 @@ namespace FuelRadar.Model
 {
     public enum Brand
     {
-        None,
-        Shell,
-        Aral,
-        Total
+        None = 0,
+        Shell = 1,
+        Aral = 2
+        /* Esso = 3,
+         Total = 4,
+         BP = 5,
+         Jet = 6 */
     }
 
     public static class BrandHelpers
     {
-        public static Brand FromString(String str)
+        public static Brand FromString(String brandString)
         {
-            return Brand.None;
+            Brand result;
+            return Enum.TryParse(brandString, true, out result) ? result : Brand.None;
+        }
+
+        public static String Name(this Brand brand)
+        {
+            return Enum.GetName(typeof(Brand), brand);
         }
     }
 }

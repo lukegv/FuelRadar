@@ -2,21 +2,93 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+            xmlns:converter="clr-namespace:FuelRadar.UI.Converter"
             x:Class="FuelRadar.UI.SearchResultPage">
-  <ContentPage Title="Top">
-    <Grid>
-      
+  <TabbedPage.Resources>
+    <ResourceDictionary>
+      <converter:BrandToColorConverter x:Key="BrandToColor" />
+      <converter:BrandToIconConverter x:Key="BrandToIcon" />
+    </ResourceDictionary>
+  </TabbedPage.Resources>
+  <!--Detail Tab-->
+  <ContentPage Title="Detail" BindingContext="{Binding SelectedResult}">
+    <Grid Padding="15" Grid.RowSpacing="10">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="3*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <!--Header-->
+      <Grid Grid.Row="0" Grid.ColumnSpacing="10">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="{Binding Brand, Converter={StaticResource BrandToIcon}}" Aspect="AspectFit" />
+        <Label Grid.Column="1" Text="{Binding Name}" FontSize="28" LineBreakMode="TailTruncation" />
+      </Grid>
+      <!--Prices-->
+      <Frame Grid.Row="1" OutlineColor="Black" BackgroundColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=back}" Padding="5" >
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <!--Main fuel-->
+          <Label Grid.Column="0" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="28"
+                 Text="Diesel" FontAttributes="Bold" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
+          <Frame Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
+                 BackgroundColor="White" OutlineColor="Black">
+            <Label Text="{Binding MainPriceString}" FontSize="24" />
+          </Frame>
+          <!--Additional fuels-->
+          <Label Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"
+                 Text="Super" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
+          <Frame Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
+                 BackgroundColor="White" OutlineColor="Black">
+            <Label Text="1,389 €" FontSize="20" />
+          </Frame>
+          <Label Grid.Column="0" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"
+                 Text="E10" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}"/>
+          <Frame Grid.Column="1" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
+                 BackgroundColor="White" OutlineColor="Black">
+            <Label Text="1.239 €" FontSize="20" />
+          </Frame>
+        </Grid>
+      </Frame>
     </Grid>
   </ContentPage>
+  <!--List Tab-->
   <ContentPage Title="List">
-    <ListView ItemsSource="{Binding Results}">
+    <ListView ItemsSource="{Binding Results}" SelectedItem="{Binding SelectedResult}">
       <ListView.ItemTemplate>
         <DataTemplate>
-          <TextCell Text="{Binding GasStation.Name}" Detail="{Binding GasStation.Id}" />
+          <ViewCell>
+            <Grid Padding="8">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="3" />
+              </Grid.ColumnDefinitions>
+              <Image Grid.Column="0" Source="{Binding Brand, Converter={StaticResource BrandToIcon}}" />
+              <Label Grid.Column="1" VerticalOptions="Center" LineBreakMode="TailTruncation" Text="{Binding Name}" FontSize="18" />
+              <Frame Grid.Column="2" VerticalOptions="Center" BackgroundColor="White" Padding="5" OutlineColor="Black" >
+                <Label Text="{Binding MainPriceString}" FontSize="16" VerticalOptions="Center" />
+              </Frame>
+            </Grid>
+          </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
   </ContentPage>
+  <!--Map Tab-->
   <ContentPage Title="Map">
     <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill" Padding="0">
       <maps:Map x:Name="ResultMap" IsShowingUser="True" >

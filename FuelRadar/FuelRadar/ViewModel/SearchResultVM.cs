@@ -16,24 +16,19 @@ namespace FuelRadar.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public PriceInfo TopResult
-        {
-            get
-            {
-                return this.Results.OrderByDescending(price => price.CurrentPrice.Diesel).First();
-            }
-        }
+        public PriceInfoVM SelectedResult { get; set; }
 
-        public List<PriceInfo> Results { get; private set; }
+        public List<PriceInfoVM> Results { get; set; }
 
         public SearchResultVM()
         {
-            this.Results = new List<PriceInfo>();
+            this.Results = new List<PriceInfoVM>();
         }
 
         public void UpdateResults(List<PriceInfo> newResults)
         {
-            this.Results = newResults;
+            this.Results = newResults.Select(priceInfo => new PriceInfoVM(priceInfo)).OrderBy(vm => vm.MainPrice).ToList();
+            this.SelectedResult = this.Results.First();
         }
     }
 }

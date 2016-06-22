@@ -15,7 +15,9 @@
                   <ColumnDefinition Width="*" />
                   <ColumnDefinition Width="5*" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="{Binding IconSource}" />
+                <ContentView Grid.Column="0" Padding="5" >
+                  <Image Source="{Binding IconSource}" Aspect="AspectFit" />
+                </ContentView>
                 <Label Grid.Column="1" Text="{Binding Title}" TextColor="#C94136" FontSize="20" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
               </Grid>
             </ViewCell>
