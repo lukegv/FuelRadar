@@ -3,20 +3,23 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:converter="clr-namespace:FuelRadar.UI.Converter"
               x:Class="FuelRadar.UI.FavoritesPage"
+              x:Name="favoriteCarousel"
               ItemsSource="{Binding Favorites}" >
   <CarouselPage.Resources>
     <ResourceDictionary>
+      <converter:BooleanInverseConverter x:Key="BooleanInverse" />
       <converter:BrandToIconConverter x:Key="BrandToIcon" />
+      <converter:BrandToColorConverter x:Key="BrandToColor" />
     </ResourceDictionary>
   </CarouselPage.Resources>
   <CarouselPage.ItemTemplate>
     <DataTemplate>
       <ContentPage>
-        <Grid Padding="10">
+        <Grid Padding="15" Grid.RowSpacing="10">
           <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="2*" />
           </Grid.RowDefinitions>
           <!--Header-->
           <Grid Grid.Row="0" Grid.ColumnSpacing="10">
@@ -24,8 +27,69 @@
               <ColumnDefinition Width="auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="{Binding Brand, Converter={StaticResource BrandToIcon}}" Scale="2" />
-            <Label Grid.Column="1" Text="{Binding Name}" FontSize="24" LineBreakMode="TailTruncation" />
+            <Image Grid.Column="0" Source="{Binding Brand, Converter={StaticResource BrandToIcon}}" Aspect="AspectFit" />
+            <Label Grid.Column="1" Text="{Binding Name}" FontSize="28" LineBreakMode="TailTruncation" />
+          </Grid>
+          <!--Prices-->
+          <Frame Grid.Row="1" OutlineColor="Black" IsVisible="{Binding IsPriceAvailable}" 
+                 BackgroundColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=back}" >
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <!--Main fuel-->
+              <Label Grid.Column="0" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="28"
+                     Text="{Binding MainPriceType}" FontAttributes="Bold" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
+              <Frame Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
+                     BackgroundColor="White" OutlineColor="Black">
+                <Label Text="{Binding MainPriceString}" FontSize="24" />
+              </Frame>
+              <!--Additional fuels-->
+              <Label Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"
+                     Text="{Binding SecondPriceType}" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
+              <Frame Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
+                     BackgroundColor="White" OutlineColor="Black">
+                <Label Text="{Binding SecondPriceString}" FontSize="20" />
+              </Frame>
+              <Label Grid.Column="0" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"
+                     Text="{Binding ThirdPriceType}" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}"/>
+              <Frame Grid.Column="1" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
+                     BackgroundColor="White" OutlineColor="Black">
+                <Label Text="{Binding ThirdPriceString}" FontSize="20" />
+              </Frame>
+            </Grid>
+          </Frame>
+          <!--IF NO PRICE AVAILABLE-->
+          <Grid Grid.Row="1" IsVisible="{Binding IsPriceAvailable, Converter={StaticResource BooleanInverse}}"
+                BindingContext="{Binding Source={x:Reference favoriteCarousel}, Path=BindingContext}" >
+            <Button Grid.Row="0" Text="Load Prices" HorizontalOptions="Center" VerticalOptions="Center"
+                    IsVisible="{Binding IsLoadingPrices, Converter={StaticResource BooleanInverse}}"
+                    Command="{Binding LoadPrices}" BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
+            <ActivityIndicator Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center"
+                               IsVisible="{Binding IsLoadingPrices}" IsRunning="{Binding IsLoadingPrices}" />
+          </Grid>
+          <!--Actions-->
+          <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="1" Grid.Column="0" Source="navigation.png" Aspect="AspectFit" />
+            <Button Grid.Row="1" Grid.Column="1" Text="Navigate there" Command="{Binding Navigate}"
+                  BackgroundColor="White" BorderWidth="3" BorderColor="#C94136" />
+            <Image Grid.Row="0" Grid.Column="0" Source="{Binding FavoriteIcon}" Aspect="AspectFit" />
+            <Button Grid.Row="0" Grid.Column="1" Text="{Binding FavoriteText}" Command="{Binding ToggleFavorite}"
+                  BackgroundColor="White" BorderWidth="3" BorderColor="#C94136" />
           </Grid>
         </Grid>
       </ContentPage>

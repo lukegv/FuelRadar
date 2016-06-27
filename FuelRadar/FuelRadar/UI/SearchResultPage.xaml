@@ -16,8 +16,7 @@
       <Grid.RowDefinitions>
         <RowDefinition Height="auto" />
         <RowDefinition Height="3*" />
-        <RowDefinition Height="*" />
-        <RowDefinition Height="*" />
+        <RowDefinition Height="2*" />
       </Grid.RowDefinitions>
       <!--Header-->
       <Grid Grid.Row="0" Grid.ColumnSpacing="10">
@@ -29,7 +28,7 @@
         <Label Grid.Column="1" Text="{Binding Name}" FontSize="28" LineBreakMode="TailTruncation" />
       </Grid>
       <!--Prices-->
-      <Frame Grid.Row="1" OutlineColor="Black" BackgroundColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=back}" Padding="5" >
+      <Frame Grid.Row="1" OutlineColor="Black" BackgroundColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=back}" >
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
@@ -42,26 +41,43 @@
           </Grid.ColumnDefinitions>
           <!--Main fuel-->
           <Label Grid.Column="0" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="28"
-                 Text="Diesel" FontAttributes="Bold" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
+                 Text="{Binding MainPriceType}" FontAttributes="Bold" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
           <Frame Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
                  BackgroundColor="White" OutlineColor="Black">
             <Label Text="{Binding MainPriceString}" FontSize="24" />
           </Frame>
           <!--Additional fuels-->
           <Label Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"
-                 Text="Super" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
+                 Text="{Binding SecondPriceType}" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}" />
           <Frame Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
                  BackgroundColor="White" OutlineColor="Black">
-            <Label Text="1,389 €" FontSize="20" />
+            <Label Text="{Binding SecondPriceString}" FontSize="20" />
           </Frame>
           <Label Grid.Column="0" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"
-                 Text="E10" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}"/>
+                 Text="{Binding ThirdPriceType}" TextColor="{Binding Brand, Converter={StaticResource BrandToColor}, ConverterParameter=fore}"/>
           <Frame Grid.Column="1" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" Padding="5"
                  BackgroundColor="White" OutlineColor="Black">
-            <Label Text="1.239 €" FontSize="20" />
+            <Label Text="{Binding ThirdPriceString}" FontSize="20" />
           </Frame>
         </Grid>
       </Frame>
+      <!--Actions-->
+      <Grid Grid.Row="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Image Grid.Row="1" Grid.Column="0" Source="navigation.png" Aspect="AspectFit" />
+        <Button Grid.Row="1" Grid.Column="1" Text="Navigate there" Command="{Binding Navigate}"
+              BackgroundColor="White" BorderWidth="3" BorderColor="#C94136" />
+        <Image Grid.Row="0" Grid.Column="0" Source="{Binding FavoriteIcon}" Aspect="AspectFit" />
+        <Button Grid.Row="0" Grid.Column="1" Text="{Binding FavoriteText}" Command="{Binding ToggleFavorite}"
+              BackgroundColor="White" BorderWidth="3" BorderColor="#C94136" />
+      </Grid>
     </Grid>
   </ContentPage>
   <!--List Tab-->

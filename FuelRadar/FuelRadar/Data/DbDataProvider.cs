@@ -42,7 +42,7 @@ namespace FuelRadar.Data
             //    queryResult = this.DbConnection.Table<FavouriteStationData>().ToList();
             //}
             //return queryResult.Select(favData => favData.ToStation()).ToList();
-            return (new Station[] { new Station("", "Test 1", "", 0, 0), new Station("", "Station 2", "", 0, 0) }).ToList();
+            return (new Station[] { new Station("23e1143f-c734-4968-aadf-6a6954ba4db7", "Shell Test", "Shell", 0, 0) }).ToList();
         }
 
         public int GetFavouriteStationCount()
@@ -51,7 +51,7 @@ namespace FuelRadar.Data
             //{
             //    return this.DbConnection.Table<FavouriteStationData>().Count();
             //}
-            return 2;
+            return 1;
         }
 
         public void AddFavouriteStation(Station gasStation)
@@ -63,7 +63,7 @@ namespace FuelRadar.Data
                 {
                     // TODO: Delete a favorite
                 }
-                this.DbConnection.Insert(new FavouriteStationData(gasStation));
+                //this.DbConnection.Insert(new FavouriteStationData(gasStation));
             }
         }
 
@@ -77,7 +77,7 @@ namespace FuelRadar.Data
 
         public bool IsFavorite(string gasStationId)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public List<Price> GetAllHistoricalPrices()
