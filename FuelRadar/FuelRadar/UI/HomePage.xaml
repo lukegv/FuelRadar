@@ -18,11 +18,11 @@
       </StackLayout>
     </ContentView>
     <ContentView Grid.Row="1" Padding="10">
-      <Button Text="Search new gas stations" Image="search.png"
+      <Button Text="Suche nach Tankstellen" Image="search.png"
               BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
     </ContentView>
     <ContentView Grid.Row="2" Padding="10">
-      <Button Text="Browse my favorite gas stations" Image="favorites.png"
+      <Button Text="Zeige meine gespeicherten Tankstellen" Image="favorites.png"
               BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
     </ContentView>
   </Grid>

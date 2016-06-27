@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight.Command;
-using Plugin.Geolocator;
-using Plugin.Geolocator.Abstractions;
 using PropertyChanged;
-using Xamarin.Forms.Maps;
 
+using FuelRadar.Geo;
 using FuelRadar.Model;
 using FuelRadar.Requests;
-
+using FuelRadar.UI.Toast;
 
 namespace FuelRadar.ViewModel
 {
@@ -31,40 +29,83 @@ namespace FuelRadar.ViewModel
 
         public bool IsSearching { get; set; }
 
+        public String SearchDescription { get; set; }
+
         public SearchStartVM()
         {
             this.AddressStreet = String.Empty;
             this.AddressTown = String.Empty;
             this.IsSearching = false;
+            this.SearchDescription = String.Empty;
             this.StartGps = new RelayCommand(() => this.RunGps());
             this.StartAddress = new RelayCommand(() => this.RunAddress());
         }
 
         public void SetSearchState(bool isSearching)
         {
+            if (!isSearching) this.SearchDescription = String.Empty;
             this.IsSearching = isSearching;
         }
 
         private async void RunGps()
         {
             this.SetSearchState(true);
-            IGeolocator geolocator = CrossGeolocator.Current;
-            Plugin.Geolocator.Abstractions.Position position = await geolocator.GetPositionAsync(10000);
+            this.SearchDescription = "Bestimme aktuelle Position ...";
+            GlobalCoordinate position = await GeoLocator.GetCurrentPosition();
+            if (position == null)
+            {
+                this.SetSearchState(false);
+                CrossToast.ShowToast("Positionsbestimmung fehlgeschlagen!");
+                return;
+            }
+            this.SearchDescription = "Suche Tankstellen ...";
             List<PriceInfo> results = await ApiRequests.RequestGasStations(new GlobalCoordinate(position.Latitude, position.Longitude), 3);
+            if (results == null)
+            {
+                this.SetSearchState(false);
+                CrossToast.ShowToast("Suche fehlgeschlagen!");
+                return;
+            }
             if (results.Count > 0)
             {
                 this.ResultsFound?.Invoke(this, results);
+                this.SearchDescription = String.Empty; // bug fix for small return delay
+            }
+            else
+            {
+                this.SetSearchState(false);
+                CrossToast.ShowToast("Es wurden keine Tankstellen gefunden.");
             }
         }
 
         private async void RunAddress()
         {
             this.SetSearchState(true);
-            IEnumerable<Xamarin.Forms.Maps.Position> positions = await (new Geocoder()).GetPositionsForAddressAsync(this.AddressStreet + "\n" + this.AddressTown);
-            List<PriceInfo> results = await ApiRequests.RequestGasStations(new GlobalCoordinate(positions.First()), 3);
+            this.SearchDescription = "Ermittle Position der Adresse ...";
+            GlobalCoordinate position = await GeoCoder.GetPositionForAddress(this.AddressStreet + "\n" + this.AddressTown);
+            if (position == null)
+            {
+                this.SetSearchState(false);
+                CrossToast.ShowToast("Positionsermittlung fehlgeschlagen");
+                return;
+            }
+            this.SearchDescription = "Suche Tankstellen ...";
+            List<PriceInfo> results = await ApiRequests.RequestGasStations(position, 3);
+            if (results == null)
+            {
+                this.SetSearchState(false);
+                CrossToast.ShowToast("Suche fehlgeschlagen!");
+                return;
+            }
             if (results.Count > 0)
             {
                 this.ResultsFound?.Invoke(this, results);
+                this.SearchDescription = String.Empty; // bug fix for small return delay
+            }
+            else
+            {
+                this.SetSearchState(false);
+                CrossToast.ShowToast("Es wurden keine Tankstellen gefunden.");
             }
         }
 

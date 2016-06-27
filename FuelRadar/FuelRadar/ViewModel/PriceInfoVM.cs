@@ -91,7 +91,7 @@ namespace FuelRadar.ViewModel
 
         public String FavoriteText
         {
-            get { return this.IsFavorite ? "Remove from favorites" : "Add to favorites"; }
+            get { return this.IsFavorite ? "Aus Favoriten entfernen" : "Zu Favoriten hinzufügen"; }
         }
 
         public String FavoriteIcon

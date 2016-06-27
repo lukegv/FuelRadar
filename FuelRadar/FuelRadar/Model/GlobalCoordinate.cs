@@ -17,16 +17,23 @@ namespace FuelRadar.Model
             this.Longitude = longitude;
         }
 
-        public GlobalCoordinate(Xamarin.Forms.Maps.Position position)
-        {
-            this.Latitude = position.Latitude;
-            this.Longitude = position.Longitude;
-        }
-
-        public Xamarin.Forms.Maps.Position ToPosition()
+        public Xamarin.Forms.Maps.Position ToMapsPosition()
         {
             return new Xamarin.Forms.Maps.Position(this.Latitude, this.Longitude);
         }
 
+    }
+
+    public static class GlobalCoordinateHelpers
+    {
+        public static GlobalCoordinate ToGlobalCoordinate(this Xamarin.Forms.Maps.Position position)
+        {
+            return new GlobalCoordinate(position.Latitude, position.Longitude);
+        }
+
+        public static GlobalCoordinate ToGlobalCoordinate(this Plugin.Geolocator.Abstractions.Position position)
+        {
+            return new GlobalCoordinate(position.Latitude, position.Longitude);
+        }
     }
 }

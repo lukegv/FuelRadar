@@ -16,12 +16,12 @@ namespace FuelRadar.UI
             this.MasterBehavior = MasterBehavior.Popover;
             
             this.DetailPageItems = new List<DetailPageItem>();
-            this.DetailPageItems.Add(new DetailPageItem("Home", "FuelRadar.UI.Images.home.png", new HomePage()));
-            this.DetailPageItems.Add(new DetailPageItem("Search", "FuelRadar.UI.Images.search.png", new SearchPage()));
-            this.DetailPageItems.Add(new DetailPageItem("Favorites", "FuelRadar.UI.Images.favorites.png", new FavoritesPage()));
-            this.DetailPageItems.Add(new DetailPageItem("Statistics", "FuelRadar.UI.Images.statistics.png", new StatisticsPage()));
-            this.DetailPageItems.Add(new DetailPageItem("Settings", "FuelRadar.UI.Images.settings.png", new SettingsPage()));
-            this.DetailPageItems.Add(new DetailPageItem("About", "FuelRadar.UI.Images.about.png", new AboutPage()));
+            this.DetailPageItems.Add(new DetailPageItem("Start", "FuelRadar.UI.Images.home.png", new HomePage()));
+            this.DetailPageItems.Add(new DetailPageItem("Suche", "FuelRadar.UI.Images.search.png", new SearchPage()));
+            this.DetailPageItems.Add(new DetailPageItem("Favoriten", "FuelRadar.UI.Images.favorites.png", new FavoritesPage()));
+            this.DetailPageItems.Add(new DetailPageItem("Statistiken", "FuelRadar.UI.Images.statistics.png", new StatisticsPage()));
+            this.DetailPageItems.Add(new DetailPageItem("Einstellungen", "FuelRadar.UI.Images.settings.png", new SettingsPage()));
+            this.DetailPageItems.Add(new DetailPageItem("Info", "FuelRadar.UI.Images.about.png", new AboutPage()));
 
             this.Master = new MasterPage(this.DetailPageItems);
             (this.Master as MasterPage).DetailPageChanged += OnDetailPageChanged;

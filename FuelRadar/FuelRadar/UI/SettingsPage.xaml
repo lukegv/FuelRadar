@@ -9,12 +9,12 @@
     </Grid.RowDefinitions>
     <ScrollView Grid.Row="0">
       <StackLayout Orientation="Vertical" Spacing="2">
-        <Label Text="My fuel type:" FontSize="20" />
-        <Picker x:Name="fuelTypePicker" Title="Pick a fuel type" SelectedIndex="{Binding FuelTypeIndex}" />
+        <Label Text="Meine Spritsorte:" FontSize="20" />
+        <Picker x:Name="fuelTypePicker" Title="Wähle eine Spritsorte" SelectedIndex="{Binding FuelTypeIndex}" />
       </StackLayout>
     </ScrollView>
     <ContentView Grid.Row="1" Padding="5">
-      <Button HorizontalOptions="Center" Text="Save" Command="{Binding Save}" BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
+      <Button HorizontalOptions="Center" Text="Speichern" Command="{Binding Save}" BackgroundColor="White" BorderColor="#C94136" BorderWidth="3" />
     </ContentView>
   </Grid>
 </ContentPage>

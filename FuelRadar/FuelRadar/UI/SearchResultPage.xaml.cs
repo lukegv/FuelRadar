@@ -31,7 +31,7 @@ namespace FuelRadar.UI
                 // set station pins
                 IEnumerable<Pin> pins = results.Select(
                     result => new Pin() {
-                        Position = result.Location.ToPosition(),
+                        Position = result.Location.ToMapsPosition(),
                         Type = PinType.SearchResult,
                         Label = result.Name });
                 foreach (Pin pin in pins)

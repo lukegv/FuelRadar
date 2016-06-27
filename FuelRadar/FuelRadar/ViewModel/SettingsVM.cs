@@ -31,7 +31,7 @@ namespace FuelRadar.ViewModel
         private void SaveSettings()
         {
             AppSettings.FuelType = (FuelType)this.FuelTypeIndex;
-            DependencyService.Get<IToastNotifier>().ShowToast("Settings saved");
+            CrossToast.ShowToast("Einstellungen gespeichert");
         }
 
     }

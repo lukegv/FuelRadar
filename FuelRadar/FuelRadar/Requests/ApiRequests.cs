@@ -22,30 +22,45 @@ namespace FuelRadar.Requests
                 new Parameter("type", "all"), new Parameter("lat", location.Latitude.ToString()),
                 new Parameter("lng", location.Longitude.ToString()), new Parameter("rad", radius.ToString()),
                 new Parameter("apikey", Secrets.API_KEY));
-            HttpWebRequest httpRequest = WebRequest.CreateHttp(requestString);
-            WebResponse response = await httpRequest.GetResponseAsync();
-            StationListResult result = null;
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-            using (JsonTextReader jsonReader = new JsonTextReader(reader))
+            try
             {
-                 result = JsonSerializer.CreateDefault().Deserialize<StationListResult>(jsonReader);
+                HttpWebRequest httpRequest = WebRequest.CreateHttp(requestString);
+                WebResponse response = await httpRequest.GetResponseAsync();
+                StationListResult result = null;
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                using (JsonTextReader jsonReader = new JsonTextReader(reader))
+                {
+                    result = JsonSerializer.CreateDefault().Deserialize<StationListResult>(jsonReader);
+                }
+                return result.IsOk ? result.ToPriceInfos() : null;
             }
-            return result.IsOk ? result.ToPriceInfos() : null;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public static async Task<Dictionary<String, Price>> RequestPrices(IEnumerable<String> stationIds)
         {
             String requestString = ApiRequests.BuildRequest(PRICE_REQUEST, 
-                new Parameter("ids", ApiRequests.BuildIdsParameter(stationIds)));
-            HttpWebRequest httpRequest = WebRequest.CreateHttp(requestString);
-            WebResponse response = await httpRequest.GetResponseAsync();
-            PriceListResult result = null;
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-            using (JsonTextReader jsonReader = new JsonTextReader(reader))
+                new Parameter("ids", ApiRequests.BuildIdsParameter(stationIds)),
+                new Parameter("apikey", Secrets.API_KEY));
+            try
             {
-                result = JsonSerializer.CreateDefault().Deserialize<PriceListResult>(jsonReader);
+                HttpWebRequest httpRequest = WebRequest.CreateHttp(requestString);
+                WebResponse response = await httpRequest.GetResponseAsync();
+                PriceListResult result = null;
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                using (JsonTextReader jsonReader = new JsonTextReader(reader))
+                {
+                    result = JsonSerializer.CreateDefault().Deserialize<PriceListResult>(jsonReader);
+                }
+                return result.IsOk ? result.Prices.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToPrice()) : null;
             }
-            return result.IsOk ? result.Prices.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToPrice()) : null;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private static String BuildRequest(String endpoint, params Parameter[] parameters)

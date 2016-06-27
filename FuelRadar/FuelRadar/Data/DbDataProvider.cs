@@ -42,7 +42,8 @@ namespace FuelRadar.Data
             //    queryResult = this.DbConnection.Table<FavouriteStationData>().ToList();
             //}
             //return queryResult.Select(favData => favData.ToStation()).ToList();
-            return (new Station[] { new Station("23e1143f-c734-4968-aadf-6a6954ba4db7", "Shell Test", "Shell", 0, 0) }).ToList();
+            return (new Station[] { new Station("23e1143f-c734-4968-aadf-6a6954ba4db7", "Demo Shell", "Shell", 0, 0),
+                new Station("35a865a4-ea2c-4f98-b0e1-dd395e6f2b53", "DEMO Aral Tankstelle", "Aral", 0, 0) }).ToList();
         }
 
         public int GetFavouriteStationCount()
@@ -51,7 +52,7 @@ namespace FuelRadar.Data
             //{
             //    return this.DbConnection.Table<FavouriteStationData>().Count();
             //}
-            return 1;
+            return 2;
         }
 
         public void AddFavouriteStation(Station gasStation)
@@ -63,7 +64,7 @@ namespace FuelRadar.Data
                 {
                     // TODO: Delete a favorite
                 }
-                //this.DbConnection.Insert(new FavouriteStationData(gasStation));
+                this.DbConnection.Insert(new FavouriteStationData(gasStation));
             }
         }
 
@@ -71,7 +72,7 @@ namespace FuelRadar.Data
         {
             lock (this.DbLock)
             {
-                
+                this.DbConnection.Execute("");
             }
         }
 
@@ -82,12 +83,18 @@ namespace FuelRadar.Data
 
         public List<Price> GetAllHistoricalPrices()
         {
-            throw new NotImplementedException();
+            lock (this.DbLock)
+            {
+                return null;
+            }
         }
 
         public void AddPriceToHistory(Price price)
         {
-            throw new NotImplementedException();
+            lock (this.DbLock)
+            {
+                
+            }
         }
 
     }

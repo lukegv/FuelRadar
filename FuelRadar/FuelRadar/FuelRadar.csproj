@@ -40,6 +40,8 @@
     <Compile Include="Data\HistoricalPriceData.cs" />
     <Compile Include="Data\DbDataProvider.cs" />
     <Compile Include="Data\ISqliteProvider.cs" />
+    <Compile Include="Geo\GeoCoder.cs" />
+    <Compile Include="Geo\GeoLocator.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\FuelType.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="UI\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Toast\CrossToast.cs" />
     <Compile Include="UI\Toast\IToastNotifier.cs" />
     <Compile Include="ViewModel\FavoritesVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
