@@ -16,7 +16,7 @@ namespace FuelRadar.Data
 
         int GetFavouriteStationCount();
 
-        void AddFavouriteStation(Station gasStation);
+        bool AddFavouriteStation(Station gasStation);
 
         void RemoveFavouriteStation(String gasStationId);
 

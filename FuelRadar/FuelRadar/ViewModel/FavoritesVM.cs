@@ -29,8 +29,16 @@ namespace FuelRadar.ViewModel
         {
             this.IsLoadingPrices = false;
             this.LoadPrices = new RelayCommand(() => this.Load());
-            this.Favorites = DbDataProvider.Instance.GetFavouriteStations()
-                .Select(station => new PriceInfoVM(new PriceInfo(station), true)).ToList();
+            this.Favorites = new List<PriceInfoVM>();
+            if (DbDataProvider.Instance.GetFavouriteStationCount() > 0)
+            {
+                this.Favorites.AddRange(DbDataProvider.Instance.GetFavouriteStations()
+                    .Select(station => new PriceInfoVM(new PriceInfo(station), true)));
+            }
+            else
+            {
+                this.Favorites.Add(new PriceInfoVM(new PriceInfo(new Station("", "", "", 0, 0))) { IsEmptyPage = true });
+            }
         }
 
         public async void Load()

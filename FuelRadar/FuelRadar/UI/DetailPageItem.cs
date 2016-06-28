@@ -9,13 +9,18 @@ namespace FuelRadar.UI
     {
         public String Title { get; private set; }
         public ImageSource IconSource { get; private set; }
-        public Page Page { get; private set; }
+        public Type PageType { get; private set; }
 
-        public DetailPageItem(String title, String iconRes, Page page)
+        public DetailPageItem(String title, String iconRes, Type pageType)
         {
             this.Title = title;
             this.IconSource = ImageSource.FromResource(iconRes);
-            this.Page = page;
+            this.PageType = pageType;
+        }
+
+        public Page CreatePage()
+        {
+            return (Page)Activator.CreateInstance(this.PageType);
         }
     }
 }

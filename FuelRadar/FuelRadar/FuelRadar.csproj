@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Data\DbConstants.cs" />
     <Compile Include="Data\IDataProvider.cs" />
     <Compile Include="Data\FavouriteStationData.cs" />
     <Compile Include="Data\HistoricalPriceData.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="UI\FavoritesPage.xaml.cs">
       <DependentUpon>FavoritesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\IPageUpdate.cs" />
     <Compile Include="UI\SearchPage.cs" />
     <Compile Include="UI\SearchResultPage.xaml.cs">
       <DependentUpon>SearchResultPage.xaml</DependentUpon>

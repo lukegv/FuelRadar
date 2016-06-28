@@ -11,12 +11,17 @@ using PropertyChanged;
 using FuelRadar.Data;
 using FuelRadar.Model;
 using FuelRadar.Settings;
+using FuelRadar.UI.Toast;
 
 namespace FuelRadar.ViewModel
 {
     [ImplementPropertyChanged]
     public class PriceInfoVM
     {
+        #region | EmptyPage | 
+        public bool IsEmptyPage { get; set; }
+        #endregion // EmptyPage
+
         public Station RepresentedStation { get; set; }
         public Price RepresentedPrice { get; set; }
 
@@ -112,6 +117,7 @@ namespace FuelRadar.ViewModel
 
         public PriceInfoVM(PriceInfo repObject, bool isFav = false)
         {
+            this.IsEmptyPage = false;
             this.SelectedFuelType = AppSettings.FuelType;
             this.RepresentedStation = repObject.GasStation;
             this.RepresentedPrice = repObject.CurrentPrice;
@@ -128,7 +134,8 @@ namespace FuelRadar.ViewModel
 
         private void AddStationToFavorites()
         {
-            DbDataProvider.Instance.AddFavouriteStation(this.RepresentedStation);
+            bool favoriteKicked = DbDataProvider.Instance.AddFavouriteStation(this.RepresentedStation);
+            if (favoriteKicked) CrossToast.ShowToast("Ein Favorit wurde entfernt und durch diese Tankstelle ersetzt.");
             this.IsFavorite = DbDataProvider.Instance.IsFavorite(this.RepresentedStation.ID);
         }
 

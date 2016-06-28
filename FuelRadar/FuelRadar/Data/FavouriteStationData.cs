@@ -6,22 +6,22 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Data
 {
-    [Table("favourite_stations")]
+    [Table(DbConstants.FavoriteStationsTable)]
     public class FavouriteStationData
     {
-        [Column("id"), Unique]
+        [Column(DbConstants.FavoriteStations.Id), Unique]
         public String ID { get; set; }
 
-        [Column("name")]
+        [Column(DbConstants.FavoriteStations.Name)]
         public String Name { get; set; }
 
-        [Column("brand")]
+        [Column(DbConstants.FavoriteStations.Brand)]
         public int Brand { get; set; }
 
-        [Column("latitude")]
+        [Column(DbConstants.FavoriteStations.Latitude)]
         public double Latitude { get; set; }
 
-        [Column("longitude")]
+        [Column(DbConstants.FavoriteStations.Longitude)]
         public double Longitude { get; set; }
 
         public FavouriteStationData()

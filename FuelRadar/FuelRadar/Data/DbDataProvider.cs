@@ -36,49 +36,56 @@ namespace FuelRadar.Data
 
         public List<Station> GetFavouriteStations()
         {
-            //List<FavouriteStationData> queryResult;
-            //lock (this.DbLock)
-            //{
-            //    queryResult = this.DbConnection.Table<FavouriteStationData>().ToList();
-            //}
-            //return queryResult.Select(favData => favData.ToStation()).ToList();
-            return (new Station[] { new Station("23e1143f-c734-4968-aadf-6a6954ba4db7", "Demo Shell", "Shell", 0, 0),
-                new Station("35a865a4-ea2c-4f98-b0e1-dd395e6f2b53", "DEMO Aral Tankstelle", "Aral", 0, 0) }).ToList();
+            List<FavouriteStationData> queryResult;
+            lock (this.DbLock)
+            {
+                queryResult = this.DbConnection.Table<FavouriteStationData>().ToList();
+            }
+            return queryResult.Select(favData => favData.ToStation()).ToList();
         }
 
         public int GetFavouriteStationCount()
         {
-            //lock (this.DbLock)
-            //{
-            //    return this.DbConnection.Table<FavouriteStationData>().Count();
-            //}
-            return 2;
+            lock (this.DbLock)
+            {
+                return this.DbConnection.Table<FavouriteStationData>().Count();
+            }
         }
 
-        public void AddFavouriteStation(Station gasStation)
+        public bool AddFavouriteStation(Station gasStation)
         {
+            bool favoriteKicked = false;
             lock (this.DbLock)
             {
                 int count = this.DbConnection.Table<FavouriteStationData>().Count();
                 if (count == 10)
                 {
-                    // TODO: Delete a favorite
+                    this.DbConnection.Execute("DELETE FROM " + DbConstants.FavoriteStationsTable + " LIMIT 1");
+                    favoriteKicked = true;
                 }
                 this.DbConnection.Insert(new FavouriteStationData(gasStation));
             }
+            return favoriteKicked;
         }
 
         public void RemoveFavouriteStation(string gasStationId)
         {
             lock (this.DbLock)
             {
-                this.DbConnection.Execute("");
+                this.DbConnection.Execute(
+                    "DELETE FROM " + DbConstants.FavoriteStationsTable + 
+                    " WHERE " + DbConstants.FavoriteStations.Id + " = '" + gasStationId + "'");
             }
         }
 
         public bool IsFavorite(string gasStationId)
         {
-            return false;
+            lock (this.DbLock)
+            {
+                return this.DbConnection.ExecuteScalar<int>(
+                    "SELECT count(*) FROM " + DbConstants.FavoriteStationsTable + 
+                    " WHERE " + DbConstants.FavoriteStations.Id + " = '" + gasStationId + "'") > 0;
+            }
         }
 
         public List<Price> GetAllHistoricalPrices()

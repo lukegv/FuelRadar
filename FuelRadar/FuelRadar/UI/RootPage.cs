@@ -15,23 +15,44 @@ namespace FuelRadar.UI
             // Important for Windows apps with different default behavior
             this.MasterBehavior = MasterBehavior.Popover;
             
+            // Create a list of all detail pages
             this.DetailPageItems = new List<DetailPageItem>();
-            this.DetailPageItems.Add(new DetailPageItem("Start", "FuelRadar.UI.Images.home.png", new HomePage()));
-            this.DetailPageItems.Add(new DetailPageItem("Suche", "FuelRadar.UI.Images.search.png", new SearchPage()));
-            this.DetailPageItems.Add(new DetailPageItem("Favoriten", "FuelRadar.UI.Images.favorites.png", new FavoritesPage()));
-            this.DetailPageItems.Add(new DetailPageItem("Statistiken", "FuelRadar.UI.Images.statistics.png", new StatisticsPage()));
-            this.DetailPageItems.Add(new DetailPageItem("Einstellungen", "FuelRadar.UI.Images.settings.png", new SettingsPage()));
-            this.DetailPageItems.Add(new DetailPageItem("Info", "FuelRadar.UI.Images.about.png", new AboutPage()));
+            this.DetailPageItems.Add(new DetailPageItem("Start", "FuelRadar.UI.Images.home.png", typeof(HomePage)));
+            this.DetailPageItems.Add(new DetailPageItem("Suche", "FuelRadar.UI.Images.search.png", typeof(SearchPage)));
+            this.DetailPageItems.Add(new DetailPageItem("Favoriten", "FuelRadar.UI.Images.favorites.png", typeof(FavoritesPage)));
+            this.DetailPageItems.Add(new DetailPageItem("Statistiken", "FuelRadar.UI.Images.statistics.png", typeof(StatisticsPage)));
+            this.DetailPageItems.Add(new DetailPageItem("Einstellungen", "FuelRadar.UI.Images.settings.png", typeof(SettingsPage)));
+            this.DetailPageItems.Add(new DetailPageItem("Info", "FuelRadar.UI.Images.about.png", typeof(AboutPage)));
 
             this.Master = new MasterPage(this.DetailPageItems);
             (this.Master as MasterPage).DetailPageChanged += OnDetailPageChanged;
-            this.Detail = this.DetailPageItems[0].Page;
+            // Create the first detail page
+            HomePage startPage = new HomePage();
+            startPage.GoSearch += OnGoSearch;
+            startPage.GoFavorites += OnGoFavorites;
+            this.Detail = startPage;
         }
 
         public void OnDetailPageChanged(object sender, DetailPageItem item)
         {
-            this.Detail = item.Page;
+            this.Detail = item.CreatePage();
+            HomePage homePage = this.Detail as HomePage;
+            if (homePage != null)
+            {
+                homePage.GoSearch += OnGoSearch;
+                homePage.GoFavorites += OnGoFavorites;
+            }
             this.IsPresented = false;
+        }
+
+        private void OnGoSearch(object sender, EventArgs e)
+        {
+            this.Detail = new SearchPage();
+        }
+
+        private void OnGoFavorites(object sender, EventArgs e)
+        {
+            this.Detail = new FavoritesPage();
         }
     }
 }

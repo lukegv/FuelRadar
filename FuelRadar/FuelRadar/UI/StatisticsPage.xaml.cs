@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace FuelRadar.UI
 {
-    public partial class StatisticsPage : ContentPage
+    public partial class StatisticsPage : CarouselPage
     {
         public StatisticsPage()
         {
