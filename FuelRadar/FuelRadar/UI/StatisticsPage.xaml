@@ -5,10 +5,25 @@
              x:Class="FuelRadar.UI.StatisticsPage">
   <ContentPage>
     <Grid Padding="10" RowSpacing="10">
-      <oxy:PlotView HorizontalOptions="Fill" VerticalOptions="Fill" Model="{Binding Model}" />
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Durchschnittlicher Preis" FontSize="22" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+      <Picker Grid.Row="1" Grid.Column="0" x:Name="dowPicker" Title="Wähle einen Tag" 
+              SelectedIndex="{Binding AverageSelectedDowIndex}" />
+      <Picker Grid.Row="1" Grid.Column="1" x:Name="fuelTypePicker" Title="Wähle eine Spritsorte"
+              SelectedIndex="{Binding AverageSelectedFuelTypeIndex}" />
+      <oxy:PlotView Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Model="{Binding AverageModel}" />
     </Grid>
   </ContentPage>
   <ContentPage>
-    
+    <Label HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" 
+           Text="Weitere Statistiken sind in Kürze verfügbar!" FontSize="22" />
   </ContentPage>
 </CarouselPage>

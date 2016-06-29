@@ -88,20 +88,22 @@ namespace FuelRadar.Data
             }
         }
 
-        public List<Price> GetAllHistoricalPrices()
+        public void AddPriceToHistory(PriceInfo price)
         {
             lock (this.DbLock)
             {
-                return null;
+                this.DbConnection.Insert(new HistoricalPriceData(price));
             }
         }
 
-        public void AddPriceToHistory(Price price)
+        public double[] GetAveragePrice(FuelType type, DayOfWeek? dow)
         {
+            String dowClause = dow.HasValue ? "" : String.Empty;
             lock (this.DbLock)
             {
-                
+                //return this.DbConnection.Query<double>("").ToArray();
             }
+            return new double[] { 1.12, 1.2, 1.3, 1.25, 1.45, 1.32, 1.29, 1.01 };
         }
 
     }

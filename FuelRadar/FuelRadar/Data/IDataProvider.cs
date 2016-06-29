@@ -24,8 +24,8 @@ namespace FuelRadar.Data
 
         // Prices
 
-        List<Price> GetAllHistoricalPrices();
+        void AddPriceToHistory(PriceInfo price);
 
-        void AddPriceToHistory(Price price);
+        double[] GetAveragePrice(FuelType type, DayOfWeek? dow);
     }
 }

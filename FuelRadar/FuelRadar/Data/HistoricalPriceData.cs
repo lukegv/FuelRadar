@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using SQLite;
 
+using FuelRadar.Model;
+
 namespace FuelRadar.Data
 {
     [Table("price_history")]
@@ -34,6 +36,17 @@ namespace FuelRadar.Data
         public HistoricalPriceData()
         {
 
+        }
+
+        public HistoricalPriceData(PriceInfo info)
+        {
+            this.TimeStamp = DateTime.Now;
+            this.GasStationID = info.GasStation.ID;
+            this.Latitude = info.GasStation.Location.Latitude;
+            this.Longitude = info.GasStation.Location.Longitude;
+            this.DieselPrice = info.CurrentPrice.Diesel;
+            this.E5Price = info.CurrentPrice.E5;
+            this.E10Price = info.CurrentPrice.E10;
         }
     }
 }

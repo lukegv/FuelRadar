@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
+using FuelRadar.Model;
 using FuelRadar.ViewModel;
 
 namespace FuelRadar.UI
@@ -14,8 +15,17 @@ namespace FuelRadar.UI
     {
         public StatisticsPage()
         {
-            this.BindingContext = new StatisticsVM();
             this.InitializeComponent();
+            foreach (String fuelTypeString in FuelTypeHelpers.GetList().Select(ft => ft.Name()))
+            {
+                this.fuelTypePicker.Items.Add(fuelTypeString);
+            }
+            this.dowPicker.Items.Add("Alle Tage");
+            foreach (String dowString in DayOfWeekHelpers.GetList().Select(dow => dow.GermanName()))
+            {
+                this.dowPicker.Items.Add(dowString);
+            }
+            this.BindingContext = new StatisticsVM();
         }
     }
 }

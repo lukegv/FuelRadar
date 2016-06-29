@@ -45,6 +45,7 @@
     <Compile Include="Geo\GeoLocator.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Brand.cs" />
+    <Compile Include="Model\DayOfWeek.cs" />
     <Compile Include="Model\FuelType.cs" />
     <Compile Include="Model\GlobalCoordinate.cs" />
     <Compile Include="Model\Price.cs" />
