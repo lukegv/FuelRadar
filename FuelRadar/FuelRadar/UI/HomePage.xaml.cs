@@ -1,11 +1,13 @@
-﻿using FuelRadar.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Xamarin.Forms;
+
+using GalaSoft.MvvmLight.Command;
 
 namespace FuelRadar.UI
 {
@@ -14,23 +16,16 @@ namespace FuelRadar.UI
         public event EventHandler GoSearch;
         public event EventHandler GoFavorites;
 
+        public ICommand GoToSearch { get; set; }
+        public ICommand GoToFavorites { get; set; }
+
         public HomePage()
         {
-            HomeVM viewModel = new HomeVM();
-            viewModel.GoSearch += RouteGoSearch;
-            viewModel.GoFavorites += RouteGoFavorites;
-            this.BindingContext = viewModel;
+            this.GoToSearch = new RelayCommand(() => this.GoSearch?.Invoke(this, null));
+            this.GoToFavorites = new RelayCommand(() => this.GoFavorites?.Invoke(this, null));
+            // No explicit view model (only few bindings)
+            this.BindingContext = this;
             this.InitializeComponent();
-        }
-
-        private void RouteGoSearch(object sender, EventArgs e)
-        {
-            this.GoSearch?.Invoke(this, e);
-        }
-
-        private void RouteGoFavorites(object sender, EventArgs e)
-        {
-            this.GoFavorites?.Invoke(this, e);
         }
     }
 }

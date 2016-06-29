@@ -24,6 +24,8 @@
              HorizontalOptions="Center" HorizontalTextAlignment="Center" />
       <Label Text="Sqlite .Net PCL" FontSize="18" LineBreakMode="WordWrap"
              HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+      <Label Text="Xam Plugin ExternalMaps" FontSize="18" LineBreakMode="WordWrap" 
+             HorizontalOptions="Center" HorizontalTextAlignment="Center" />
       <Label Text="Xam Plugin Geolocator" FontSize="18" LineBreakMode="WordWrap"
              HorizontalOptions="Center" HorizontalTextAlignment="Center" />
       <Label Text="Xam Plugin Settings" FontSize="18" LineBreakMode="WordWrap"

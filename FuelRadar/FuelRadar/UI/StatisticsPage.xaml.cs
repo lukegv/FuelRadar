@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
+using FuelRadar.ViewModel;
+
 namespace FuelRadar.UI
 {
     public partial class StatisticsPage : CarouselPage
     {
         public StatisticsPage()
         {
-            InitializeComponent();
+            this.BindingContext = new StatisticsVM();
+            this.InitializeComponent();
         }
     }
 }

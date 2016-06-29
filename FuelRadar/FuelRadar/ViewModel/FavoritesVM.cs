@@ -19,6 +19,8 @@ namespace FuelRadar.ViewModel
     [ImplementPropertyChanged]
     public class FavoritesVM
     {
+        public int FavoriteCount { get; set; }
+
         public List<PriceInfoVM> Favorites { get; set; }
 
         public bool IsLoadingPrices { get; set; }
@@ -30,7 +32,8 @@ namespace FuelRadar.ViewModel
             this.IsLoadingPrices = false;
             this.LoadPrices = new RelayCommand(() => this.Load());
             this.Favorites = new List<PriceInfoVM>();
-            if (DbDataProvider.Instance.GetFavouriteStationCount() > 0)
+            this.FavoriteCount = DbDataProvider.Instance.GetFavouriteStationCount();
+            if (this.FavoriteCount > 0)
             {
                 this.Favorites.AddRange(DbDataProvider.Instance.GetFavouriteStations()
                     .Select(station => new PriceInfoVM(new PriceInfo(station), true)));
@@ -43,21 +46,24 @@ namespace FuelRadar.ViewModel
 
         public async void Load()
         {
-            this.IsLoadingPrices = true;
-            IEnumerable<String> stationIds = this.Favorites.Select(vm => vm.RepresentedStation.ID);
-            Dictionary<String, Price> results = await ApiRequests.RequestPrices(stationIds);
-            if (results != null)
+            if (this.FavoriteCount > 0)
             {
-                foreach (KeyValuePair<String, Price> result in results)
+                this.IsLoadingPrices = true;
+                IEnumerable<String> stationIds = this.Favorites.Select(vm => vm.RepresentedStation.ID);
+                Dictionary<String, Price> results = await ApiRequests.RequestPrices(stationIds);
+                if (results != null)
                 {
-                    this.Favorites.First(fav => fav.RepresentedStation.ID == result.Key).RepresentedPrice = result.Value;
+                    foreach (KeyValuePair<String, Price> result in results)
+                    {
+                        this.Favorites.First(fav => fav.RepresentedStation.ID == result.Key).RepresentedPrice = result.Value;
+                    }
                 }
+                else
+                {
+                    CrossToast.ShowToast("Preisanfrage fehlgeschlagen");
+                }
+                this.IsLoadingPrices = false;
             }
-            else
-            {
-                CrossToast.ShowToast("Preisanfrage fehlgeschlagen");
-            }
-            this.IsLoadingPrices = false;
         }
 
     }

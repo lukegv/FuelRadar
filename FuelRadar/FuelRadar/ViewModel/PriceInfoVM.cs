@@ -7,6 +7,8 @@ using System.Windows.Input;
 
 using GalaSoft.MvvmLight.Command;
 using PropertyChanged;
+using Plugin.ExternalMaps;
+using Plugin.ExternalMaps.Abstractions;
 
 using FuelRadar.Data;
 using FuelRadar.Model;
@@ -114,7 +116,6 @@ namespace FuelRadar.ViewModel
 
         private FuelType SelectedFuelType { get; set; }
 
-
         public PriceInfoVM(PriceInfo repObject, bool isFav = false)
         {
             this.IsEmptyPage = false;
@@ -129,7 +130,8 @@ namespace FuelRadar.ViewModel
 
         private void StartNavigation()
         {
-
+            CrossExternalMaps.Current.NavigateTo(this.RepresentedStation.Name, this.RepresentedStation.Location.Latitude, 
+                this.RepresentedStation.Location.Longitude, NavigationType.Driving);
         }
 
         private void AddStationToFavorites()

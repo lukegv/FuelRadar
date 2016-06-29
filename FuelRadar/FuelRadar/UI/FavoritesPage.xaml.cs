@@ -19,7 +19,6 @@ namespace FuelRadar.UI
         {
             this.BindingContext = new FavoritesVM();
             this.InitializeComponent();
-            (this.BindingContext as FavoritesVM).Load();
         }
     }
 }

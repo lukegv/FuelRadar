@@ -5,14 +5,17 @@ using Xamarin.Forms;
 
 namespace FuelRadar.UI
 {
+    /// <summary>
+    /// The main page of the app with the navigation drawer
+    /// </summary>
     public class RootPage : MasterDetailPage
     {
         private List<DetailPageItem> DetailPageItems;
 
         public RootPage()
         {
-            // Define master behavior as slider
-            // Important for Windows apps with different default behavior
+            // Define master behavior to always sliding
+            // Important for Windows apps (default behavior: fixed master page)
             this.MasterBehavior = MasterBehavior.Popover;
             
             // Create a list of all detail pages
@@ -26,7 +29,7 @@ namespace FuelRadar.UI
 
             this.Master = new MasterPage(this.DetailPageItems);
             (this.Master as MasterPage).DetailPageChanged += OnDetailPageChanged;
-            // Create the first detail page
+            // Create a home page at start
             HomePage startPage = new HomePage();
             startPage.GoSearch += OnGoSearch;
             startPage.GoFavorites += OnGoFavorites;
@@ -36,14 +39,18 @@ namespace FuelRadar.UI
         public void OnDetailPageChanged(object sender, DetailPageItem item)
         {
             this.Detail = item.CreatePage();
+            // Add special handlers for home pages
             HomePage homePage = this.Detail as HomePage;
             if (homePage != null)
             {
                 homePage.GoSearch += OnGoSearch;
                 homePage.GoFavorites += OnGoFavorites;
             }
+            // Close navigation drawer
             this.IsPresented = false;
         }
+
+        // Special handlers for page changes
 
         private void OnGoSearch(object sender, EventArgs e)
         {

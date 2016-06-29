@@ -11,14 +11,19 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Requests
 {
+    /// <summary>
+    /// Handles the web requests to the Tankerkönig API
+    /// </summary>
     public static class ApiRequests
     {
         private const String LIST_REQUEST = "https://creativecommons.tankerkoenig.de/json/list.php?";
         private const String PRICE_REQUEST = "https://creativecommons.tankerkoenig.de/json/prices.php?";
 
-        public static async Task<List<PriceInfo>> RequestGasStations(GlobalCoordinate location, double radius)
+        private const double DEFAULT_RADIUS = 3;
+
+        public static async Task<List<PriceInfo>> RequestGasStations(GlobalCoordinate location, double radius = DEFAULT_RADIUS)
         {
-            String requestString = BuildRequest(LIST_REQUEST, 
+            String requestString = ApiRequests.BuildRequest(LIST_REQUEST, 
                 new Parameter("type", "all"), new Parameter("lat", location.Latitude.ToString()),
                 new Parameter("lng", location.Longitude.ToString()), new Parameter("rad", radius.ToString()),
                 new Parameter("apikey", Secrets.API_KEY));
@@ -36,6 +41,7 @@ namespace FuelRadar.Requests
             }
             catch (Exception ex)
             {
+                // If anything went wrong (maybe better error handling later)
                 return null;
             }
         }
@@ -59,13 +65,14 @@ namespace FuelRadar.Requests
             }
             catch (Exception ex)
             {
+                // If anything went wrong (maybe better error handling later)
                 return null;
             }
         }
 
         private static String BuildRequest(String endpoint, params Parameter[] parameters)
         {
-            return endpoint + new List<Parameter>(parameters).Aggregate(String.Empty, (a, b) => a + "&" + b.ToString()).TrimStart('&');
+            return endpoint + String.Join("&", parameters.Select(par => par.ToString()));
         }
 
         private const String QUOTE = "\"";
@@ -77,6 +84,9 @@ namespace FuelRadar.Requests
 
     }
 
+    /// <summary>
+    /// Builds a request parameter
+    /// </summary>
     public class Parameter
     {
         public String Name { get; private set; }

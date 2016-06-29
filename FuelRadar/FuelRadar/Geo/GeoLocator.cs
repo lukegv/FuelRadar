@@ -11,6 +11,9 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Geo
 {
+    /// <summary>
+    /// Provides the functionality to determine the current device location
+    /// </summary>
     public static class GeoLocator
     {
         private const int TIMEOUT = 10000;
@@ -24,6 +27,7 @@ namespace FuelRadar.Geo
             }
             catch (Exception ex)
             {
+                // if anything went wrong (maybe better error handling later)
                 return null;
             }
         }

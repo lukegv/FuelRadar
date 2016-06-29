@@ -12,7 +12,7 @@ namespace FuelRadar.UI
     {
         public AboutPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -2,11 +2,11 @@
 using Android.Content.PM;
 using Android.OS;
 
+using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 using FuelRadar.UI;
-using Xamarin;
 
 namespace FuelRadar.Droid
 {
@@ -19,6 +19,8 @@ namespace FuelRadar.Droid
 
             Forms.Init(this, bundle);
             FormsMaps.Init(this, bundle);
+            // Initialize the plot view
+            OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
 
             this.LoadApplication(new RootApplication());
         }

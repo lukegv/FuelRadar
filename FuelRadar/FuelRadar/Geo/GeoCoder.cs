@@ -10,12 +10,16 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Geo
 {
+    /// <summary>
+    /// Provides the functionality to determine a coordinate for an address
+    /// </summary>
     public static class GeoCoder
     {
         private static Geocoder Instance;
 
         public static async Task<GlobalCoordinate> GetPositionForAddress(String address)
         {
+            // Singleton Xamarin Forms Geocoder
             if (GeoCoder.Instance == null) GeoCoder.Instance = new Geocoder();
             try
             {
@@ -24,6 +28,7 @@ namespace FuelRadar.Geo
             }
             catch (Exception ex)
             {
+                // If anything went wrong (maybe better error handling later)
                 return null;
             }
         }

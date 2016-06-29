@@ -59,7 +59,7 @@ namespace FuelRadar.ViewModel
                 return;
             }
             this.SearchDescription = "Suche Tankstellen ...";
-            List<PriceInfo> results = await ApiRequests.RequestGasStations(new GlobalCoordinate(position.Latitude, position.Longitude), 3);
+            List<PriceInfo> results = await ApiRequests.RequestGasStations(new GlobalCoordinate(position.Latitude, position.Longitude));
             if (results == null)
             {
                 this.SetSearchState(false);
@@ -90,7 +90,7 @@ namespace FuelRadar.ViewModel
                 return;
             }
             this.SearchDescription = "Suche Tankstellen ...";
-            List<PriceInfo> results = await ApiRequests.RequestGasStations(position, 3);
+            List<PriceInfo> results = await ApiRequests.RequestGasStations(position);
             if (results == null)
             {
                 this.SetSearchState(false);
