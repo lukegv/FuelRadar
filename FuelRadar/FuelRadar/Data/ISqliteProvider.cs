@@ -8,6 +8,9 @@ using SQLite;
 
 namespace FuelRadar.Data
 {
+    /// <summary>
+    /// A sqlite database interface to implemented on each platform
+    /// </summary>
     public interface ISqliteProvider
     {
         SQLiteConnection GetConnection();

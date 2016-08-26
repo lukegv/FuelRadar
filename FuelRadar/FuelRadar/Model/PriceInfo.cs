@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FuelRadar.Model
 {
+    /// <summary>
+    /// Represents a gas station and its current fuel price
+    /// </summary>
     public class PriceInfo
     {
         public Station GasStation { get; private set; }

@@ -8,6 +8,9 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Requests
 {
+    /// <summary>
+    /// Deserializes the JSON result of a station request
+    /// </summary>
     public class StationListResult
     {
         [JsonProperty("status")]
@@ -25,6 +28,9 @@ namespace FuelRadar.Requests
         }
     }
 
+    /// <summary>
+    /// Deserializes a single station element from the JSON result of a station request
+    /// </summary>
     public class StationResult
     {
         [JsonProperty("id")]

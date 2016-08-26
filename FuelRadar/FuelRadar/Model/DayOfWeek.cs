@@ -15,6 +15,11 @@ namespace FuelRadar.Model
             return Enum.GetName(typeof(DayOfWeek), dow);
         }
 
+        /// <summary>
+        /// Returns a string representation in German for a given day of the week
+        /// </summary>
+        /// <param name="dow"></param>
+        /// <returns></returns>
         public static String GermanName(this DayOfWeek dow)
         {
             switch (dow)

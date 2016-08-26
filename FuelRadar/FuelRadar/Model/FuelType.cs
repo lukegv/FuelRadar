@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FuelRadar.Model
 {
+    /// <summary>
+    /// Represents a fuel type
+    /// </summary>
     public enum FuelType
     {
         Diesel = 0,
@@ -25,6 +28,11 @@ namespace FuelRadar.Model
             return Enum.GetName(typeof(FuelType), type);
         }
 
+        /// <summary>
+        /// Iterates through the different fuel types
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static FuelType Next(this FuelType type)
         {
             return (FuelType)(((int)type + 1) % 3);

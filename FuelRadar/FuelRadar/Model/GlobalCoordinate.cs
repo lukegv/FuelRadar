@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FuelRadar.Model
 {
+    /// <summary>
+    /// Represents a global coordinate (latitude and longitude)
+    /// </summary>
     public class GlobalCoordinate
     {
         public double Latitude { get; private set; }

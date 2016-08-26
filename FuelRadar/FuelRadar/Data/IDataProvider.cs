@@ -8,6 +8,9 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Data
 {
+    /// <summary>
+    /// An interface for the database connection
+    /// </summary>
     public interface IDataProvider
     {
         // Gas stations
@@ -26,6 +29,6 @@ namespace FuelRadar.Data
 
         void AddPriceToHistory(PriceInfo price);
 
-        double[] GetAveragePrice(FuelType type, DayOfWeek? dow);
+        IEnumerable<AveragePriceResult> GetAveragePrice(FuelType type, DayOfWeek? dow);
     }
 }

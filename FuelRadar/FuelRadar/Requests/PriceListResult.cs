@@ -7,6 +7,9 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Requests
 {
+    /// <summary>
+    /// Deserializes the JSON result of a price request
+    /// </summary>
     public class PriceListResult
     {
         [JsonProperty("status")]
@@ -25,6 +28,9 @@ namespace FuelRadar.Requests
 
     }
 
+    /// <summary>
+    /// Deserializes a single price element from the JSON result of a price request
+    /// </summary>
     public class PriceResult
     {
         [JsonProperty("status")]

@@ -15,6 +15,9 @@ using FuelRadar.UI.Toast;
 
 namespace FuelRadar.ViewModel
 {
+    /// <summary>
+    /// The viewmodel for the settings page
+    /// </summary>
     [ImplementPropertyChanged]
     public class SettingsVM
     {

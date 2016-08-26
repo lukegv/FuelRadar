@@ -15,9 +15,9 @@
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
       <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Durchschnittlicher Preis" FontSize="22" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
-      <Picker Grid.Row="1" Grid.Column="0" x:Name="dowPicker" Title="Wähle einen Tag" 
+      <Picker Grid.Row="1" Grid.Column="0" x:Name="averageDowPicker" Title="Wähle einen Tag" 
               SelectedIndex="{Binding AverageSelectedDowIndex}" />
-      <Picker Grid.Row="1" Grid.Column="1" x:Name="fuelTypePicker" Title="Wähle eine Spritsorte"
+      <Picker Grid.Row="1" Grid.Column="1" x:Name="averageFuelTypePicker" Title="Wähle eine Spritsorte"
               SelectedIndex="{Binding AverageSelectedFuelTypeIndex}" />
       <oxy:PlotView Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" Model="{Binding AverageModel}" />
     </Grid>

@@ -16,6 +16,9 @@ using FuelRadar.UI.Toast;
 
 namespace FuelRadar.ViewModel
 {
+    /// <summary>
+    /// The viewmodel for the favorites page
+    /// </summary>
     [ImplementPropertyChanged]
     public class FavoritesVM
     {
@@ -40,6 +43,8 @@ namespace FuelRadar.ViewModel
             }
             else
             {
+                // Provide a special page when there are no favorites saved
+                // CarouselPage always needs at least on page as child
                 this.Favorites.Add(new PriceInfoVM(new PriceInfo(new Station("", "", "", 0, 0))) { IsEmptyPage = true });
             }
         }

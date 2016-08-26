@@ -6,6 +6,9 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Data
 {
+    /// <summary>
+    /// The favourite gas station data structure for the database 
+    /// </summary>
     [Table(DbConstants.FavoriteStationsTable)]
     public class FavouriteStationData
     {

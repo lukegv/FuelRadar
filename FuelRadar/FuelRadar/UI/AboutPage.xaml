@@ -11,7 +11,7 @@
       <Label Text="Die Tankstellendaten stammen von www.tankerkönig.de und stehen unter der CC BY 4.0." FontSize="20" 
              LineBreakMode="WordWrap" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
       <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" HeightRequest="2"  />
-      <Label Text="Die verwendeten Icons stammen von www.flaticon.com und wurden erstellt von:" FontSize="20"
+      <Label Text="Die verwendeten Icons stammen von www.flaticon.com." FontSize="20"
              LineBreakMode="WordWrap" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
       <BoxView Grid.Row="1" Color="Gray" HorizontalOptions="Fill" HeightRequest="2"  />
       <Label Text="Die folgenen Bibliotheken und ihre Abhängigkeiten werden verwendet:" FontSize="20"
@@ -29,6 +29,8 @@
       <Label Text="Xam Plugin Geolocator" FontSize="18" LineBreakMode="WordWrap"
              HorizontalOptions="Center" HorizontalTextAlignment="Center" />
       <Label Text="Xam Plugin Settings" FontSize="18" LineBreakMode="WordWrap"
+             HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+      <Label Text="OxyPlot Xamarin Forms" FontSize="18" LineBreakMode="WordWrap"
              HorizontalOptions="Center" HorizontalTextAlignment="Center" />
     </StackLayout>
   </ScrollView>

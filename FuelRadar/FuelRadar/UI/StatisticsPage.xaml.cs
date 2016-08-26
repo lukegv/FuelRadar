@@ -18,12 +18,12 @@ namespace FuelRadar.UI
             this.InitializeComponent();
             foreach (String fuelTypeString in FuelTypeHelpers.GetList().Select(ft => ft.Name()))
             {
-                this.fuelTypePicker.Items.Add(fuelTypeString);
+                this.averageFuelTypePicker.Items.Add(fuelTypeString);
             }
-            this.dowPicker.Items.Add("Alle Tage");
+            this.averageDowPicker.Items.Add("Alle Tage");
             foreach (String dowString in DayOfWeekHelpers.GetList().Select(dow => dow.GermanName()))
             {
-                this.dowPicker.Items.Add(dowString);
+                this.averageDowPicker.Items.Add(dowString);
             }
             this.BindingContext = new StatisticsVM();
         }

@@ -8,9 +8,13 @@ using SQLite;
 using Xamarin.Forms;
 
 using FuelRadar.Model;
+using System.Diagnostics;
 
 namespace FuelRadar.Data
 {
+    /// <summary>
+    /// The implementation of the database connection
+    /// </summary>
     public class DbDataProvider : IDataProvider
     {
         private static DbDataProvider singleton = null;
@@ -96,14 +100,132 @@ namespace FuelRadar.Data
             }
         }
 
-        public double[] GetAveragePrice(FuelType type, DayOfWeek? dow)
+        public void AddPricesToHistory(IEnumerable<PriceInfo> prices)
         {
-            String dowClause = dow.HasValue ? "" : String.Empty;
             lock (this.DbLock)
             {
-                //return this.DbConnection.Query<double>("").ToArray();
+                this.DbConnection.InsertAll(prices.Select(price => new HistoricalPriceData(price)));
             }
-            return new double[] { 1.12, 1.2, 1.3, 1.25, 1.45, 1.32, 1.29, 1.01 };
+        }
+
+        public IEnumerable<AveragePriceResult> GetAveragePrice(FuelType type, DayOfWeek? dow)
+        {
+            String dowClause = dow.HasValue ? " WHERE strftime('%w', " + DbConstants.PriceHistory.Timestamp + ") = '" + ((int)dow.Value).ToString() + "' " : String.Empty;
+            lock (this.DbLock)
+            {
+                // not working, use dummy data instead :(
+                //return this.DbConnection.Query<AveragePriceResult>(
+                //    "SELECT avg(" + GetPriceConstantForFuelType(type) + ") AS AvgPrice, strftime('%H', " + DbConstants.PriceHistory.Timestamp + 
+                //    ") AS Hour FROM " + DbConstants.PriceHistoryTable + dowClause + 
+                //    " GROUP BY strftime('%H', " + DbConstants.PriceHistory.Timestamp + ")");
+            }
+            switch (type)
+            {
+                case FuelType.Diesel:
+                    return new AveragePriceResult[]
+                    {
+                        new AveragePriceResult(1.109),
+                        new AveragePriceResult(1.119),
+                        new AveragePriceResult(1.119),
+                        new AveragePriceResult(1.129),
+                        new AveragePriceResult(1.119),
+                        new AveragePriceResult(1.159),
+                        new AveragePriceResult(1.169),
+                        new AveragePriceResult(1.189),
+                        new AveragePriceResult(1.169),
+                        new AveragePriceResult(1.129),
+                        new AveragePriceResult(1.109),
+                        new AveragePriceResult(1.119),
+                        new AveragePriceResult(1.119),
+                        new AveragePriceResult(1.129),
+                        new AveragePriceResult(1.119),
+                        new AveragePriceResult(1.159),
+                        new AveragePriceResult(1.169),
+                        new AveragePriceResult(1.189),
+                        new AveragePriceResult(1.169),
+                        new AveragePriceResult(1.129),
+                        new AveragePriceResult(1.159),
+                        new AveragePriceResult(1.169),
+                        new AveragePriceResult(1.189),
+                        new AveragePriceResult(1.169),
+                        new AveragePriceResult(1.129)
+                    }.ToList();
+                case FuelType.Super:
+                    return new AveragePriceResult[]
+                    {
+                        new AveragePriceResult(1.309),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.319),
+                        new AveragePriceResult(1.229),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.259),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.389),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.229),
+                        new AveragePriceResult(1.309),
+                        new AveragePriceResult(1.319),
+                        new AveragePriceResult(1.319),
+                        new AveragePriceResult(1.329),
+                        new AveragePriceResult(1.319),
+                        new AveragePriceResult(1.359),
+                        new AveragePriceResult(1.369),
+                        new AveragePriceResult(1.489),
+                        new AveragePriceResult(1.369),
+                        new AveragePriceResult(1.229),
+                        new AveragePriceResult(1.359),
+                        new AveragePriceResult(1.469),
+                        new AveragePriceResult(1.389),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.329)
+                    }.ToList();
+                case FuelType.E10:
+                    return new AveragePriceResult[]
+                    {
+                        new AveragePriceResult(1.209),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.229),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.259),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.289),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.229),
+                        new AveragePriceResult(1.209),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.229),
+                        new AveragePriceResult(1.219),
+                        new AveragePriceResult(1.259),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.289),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.229),
+                        new AveragePriceResult(1.359),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.289),
+                        new AveragePriceResult(1.269),
+                        new AveragePriceResult(1.329)
+                    }.ToList();
+                default:
+                    throw new ArgumentException("Unknown fuel type");
+            }
+        }
+
+        private static String GetPriceConstantForFuelType(FuelType type)
+        {
+            switch (type)
+            {
+                case FuelType.Diesel:
+                    return DbConstants.PriceHistory.DieselPrice;
+                case FuelType.Super:
+                    return DbConstants.PriceHistory.E5Price;
+                case FuelType.E10:
+                    return DbConstants.PriceHistory.E10Price;
+                default:
+                    throw new ArgumentException("Unknown fuel type!");
+            }
         }
 
     }

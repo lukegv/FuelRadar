@@ -11,6 +11,9 @@ using FuelRadar.Model;
 
 namespace FuelRadar.ViewModel
 {
+    /// <summary>
+    /// The viewmodel for the search result page
+    /// </summary>
     [ImplementPropertyChanged]
     public class SearchResultVM : INotifyPropertyChanged
     {

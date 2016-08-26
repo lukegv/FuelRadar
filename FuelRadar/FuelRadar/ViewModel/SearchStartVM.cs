@@ -12,9 +12,13 @@ using FuelRadar.Geo;
 using FuelRadar.Model;
 using FuelRadar.Requests;
 using FuelRadar.UI.Toast;
+using FuelRadar.Data;
 
 namespace FuelRadar.ViewModel
 {
+    /// <summary>
+    /// The viewmodel for the search start page
+    /// </summary>
     [ImplementPropertyChanged]
     internal class SearchStartVM
     {
@@ -68,6 +72,8 @@ namespace FuelRadar.ViewModel
             }
             if (results.Count > 0)
             {
+                // Add prices to the database
+                DbDataProvider.Instance.AddPricesToHistory(results);
                 this.ResultsFound?.Invoke(this, results);
                 this.SearchDescription = String.Empty; // bug fix for small return delay
             }
@@ -99,6 +105,8 @@ namespace FuelRadar.ViewModel
             }
             if (results.Count > 0)
             {
+                // Add prices to the database
+                DbDataProvider.Instance.AddPricesToHistory(results);
                 this.ResultsFound?.Invoke(this, results);
                 this.SearchDescription = String.Empty; // bug fix for small return delay
             }

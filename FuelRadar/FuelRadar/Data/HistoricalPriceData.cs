@@ -10,27 +10,30 @@ using FuelRadar.Model;
 
 namespace FuelRadar.Data
 {
-    [Table("price_history")]
+    /// <summary>
+    /// The price data structure for the database
+    /// </summary>
+    [Table(DbConstants.PriceHistoryTable)]
     public class HistoricalPriceData
     {
-        [Column("id"), PrimaryKey, AutoIncrement]
+        [Column(DbConstants.PriceHistory.Id), PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-        [Column("timestamp")]
+        [Column(DbConstants.PriceHistory.Timestamp)]
         public DateTime TimeStamp { get; set; }
 
-        [Column("gasstation")]
+        [Column(DbConstants.PriceHistory.GasStation)]
         public String GasStationID { get; set; }
-        [Column("latitude")]
+        [Column(DbConstants.PriceHistory.Latitude)]
         public double Latitude { get; set; }
-        [Column("longitude")]
+        [Column(DbConstants.PriceHistory.Longitude)]
         public double Longitude { get; set; }
 
-        [Column("diesel")]
+        [Column(DbConstants.PriceHistory.DieselPrice)]
         public double DieselPrice { get; set; }
-        [Column("e5")]
+        [Column(DbConstants.PriceHistory.E5Price)]
         public double E5Price { get; set; }
-        [Column("e10")]
+        [Column(DbConstants.PriceHistory.E10Price)]
         public double E10Price { get; set; }
 
         public HistoricalPriceData()

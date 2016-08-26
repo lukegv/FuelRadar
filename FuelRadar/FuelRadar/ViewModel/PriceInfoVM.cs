@@ -17,6 +17,9 @@ using FuelRadar.UI.Toast;
 
 namespace FuelRadar.ViewModel
 {
+    /// <summary>
+    /// The viewmodel to present a gas station and a price (either on favorites or on search result)
+    /// </summary>
     [ImplementPropertyChanged]
     public class PriceInfoVM
     {

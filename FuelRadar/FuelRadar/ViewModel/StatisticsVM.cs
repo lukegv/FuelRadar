@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,13 @@ using PropertyChanged;
 
 using FuelRadar.Data;
 using FuelRadar.Model;
+using FuelRadar.UI.Toast;
 
 namespace FuelRadar.ViewModel
 {
+    /// <summary>
+    /// The viewmodel of the statistics page
+    /// </summary>
     [ImplementPropertyChanged]
     public class StatisticsVM
     {
@@ -44,6 +49,9 @@ namespace FuelRadar.ViewModel
             {
                 this.averageModel.Series.Clear();
                 this.averageModel.Series.Add(this.AverageSeries);
+                // Update the plot
+                this.averageModel.InvalidatePlot(true);
+                CrossToast.ShowToast("Aufgrund von Zeitmangel leider nur Beispieldaten!");
                 return averageModel;
             }
         }
@@ -55,7 +63,7 @@ namespace FuelRadar.ViewModel
                 ColumnSeries series = new ColumnSeries() { FillColor = OxyColors.Red };
                 series.Items.AddRange(
                     DbDataProvider.Instance.GetAveragePrice(this.AverageSelectedFuelType, this.AverageSelectedDow)
-                    .Select(val => new ColumnItem(val)));
+                    .Select(val => new ColumnItem(val.AvgPrice)));
                 return series;
             }
         }
@@ -70,7 +78,6 @@ namespace FuelRadar.ViewModel
         private PlotModel averageModel;
         private Axis averageBottomAxis;
         private Axis averageLeftAxis;
-
 
         private void initializeAverageModel()
         {

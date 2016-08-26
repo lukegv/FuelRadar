@@ -44,6 +44,7 @@
     <Compile Include="Geo\GeoCoder.cs" />
     <Compile Include="Geo\GeoLocator.cs" />
     <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\AveragePriceResult.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\DayOfWeek.cs" />
     <Compile Include="Model\FuelType.cs" />

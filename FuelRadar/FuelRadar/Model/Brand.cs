@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FuelRadar.Model
 {
+    /// <summary>
+    /// Represents a gas station brand
+    /// </summary>
     public enum Brand
     {
         None = 0,
